@@ -22,6 +22,11 @@ services.AddScoped<DashboardService>();
 services.AddScoped<RoleDashboardService>();
 services.AddScoped<UserDashboardService>();
 services.AddScoped<PermissionService>();
+//other
+services.AddScoped<ConstrucionService>();
+services.AddScoped<ConstructionDetailsService>();
+services.AddScoped<ConstructionTypeService>();
+services.AddScoped<DonViHCService>();
 
 services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
 {

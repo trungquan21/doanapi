@@ -160,3 +160,8 @@ D:\doanapi\doanapi\obj\Debug\net7.0\refint\doanapi.dll
 D:\doanapi\doanapi\obj\Debug\net7.0\doanapi.pdb
 D:\doanapi\doanapi\obj\Debug\net7.0\doanapi.genruntimeconfig.cache
 D:\doanapi\doanapi\obj\Debug\net7.0\ref\doanapi.dll
+D:\doanapi\doanapi\bin\Debug\net7.0\Humanizer.dll
+D:\doanapi\doanapi\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\doanapi\doanapi\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\doanapi\doanapi\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\doanapi\doanapi\bin\Debug\net7.0\System.CodeDom.dll

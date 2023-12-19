@@ -28,8 +28,11 @@ namespace doanapi.Data
         public DbSet<Functions>? Functions { get; set; }
 
         //Other database
+        public DbSet<LoaiCongTrinh>? ConstructionType { get; set; }
+        public DbSet<CongTrinh>? Construction { get; set; }
+        public DbSet<ThongSoCongTrinh>? ConstructionDetails { get; set; }
+        public DbSet<DonViHC>? DonViHC { get; set; }
 
-      
         #endregion
     }
 }
