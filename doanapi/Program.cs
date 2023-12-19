@@ -101,7 +101,7 @@ services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://tnmt.vercel.app")
+        builder.WithOrigins("http://localhost:3000", "https://doantotnghiep-three.vercel.app/")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
