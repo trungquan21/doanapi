@@ -18,9 +18,9 @@ namespace doanapi.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsDefault = table.Column<bool>(type: "bit", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -39,9 +39,9 @@ namespace doanapi.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     PasswordSalt = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -73,11 +73,11 @@ namespace doanapi.Migrations
                     IdParent = table.Column<int>(type: "int", nullable: true),
                     TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConstructionTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true)
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,9 +94,9 @@ namespace doanapi.Migrations
                     Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PermitAccess = table.Column<bool>(type: "bit", nullable: true),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true)
                 },
@@ -111,18 +111,18 @@ namespace doanapi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProvinceId = table.Column<int>(type: "int", nullable: true),
-                    DistrictId = table.Column<int>(type: "int", nullable: true),
-                    CommuneId = table.Column<int>(type: "int", nullable: true),
+                    ProvinceId = table.Column<int>(type: "int", nullable: false),
+                    DistrictId = table.Column<int>(type: "int", nullable: false),
+                    CommuneId = table.Column<int>(type: "int", nullable: false),
                     ProvinceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DistrictName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CommuneName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AdministrativeLevel = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true)
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,6 +145,52 @@ namespace doanapi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LicenseType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LicenseTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LicenseTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LicenseType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Organization",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrganizationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TaxCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Manager = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorizedPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LegalRepresentation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Account = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Organization", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Permissions",
                 columns: table => new
                 {
@@ -154,8 +200,8 @@ namespace doanapi.Migrations
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DashboardId = table.Column<int>(type: "int", nullable: true),
-                    FunctionId = table.Column<int>(type: "int", nullable: true),
+                    DashboardId = table.Column<int>(type: "int", nullable: false),
+                    FunctionId = table.Column<int>(type: "int", nullable: false),
                     FunctionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FunctionCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -172,7 +218,7 @@ namespace doanapi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DashboardId = table.Column<int>(type: "int", nullable: true),
+                    DashboardId = table.Column<int>(type: "int", nullable: false),
                     FileControl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PermitAccess = table.Column<bool>(type: "bit", nullable: true)
                 },
@@ -189,7 +235,7 @@ namespace doanapi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DashboardId = table.Column<int>(type: "int", nullable: true),
+                    DashboardId = table.Column<int>(type: "int", nullable: false),
                     FileControl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PermitAccess = table.Column<bool>(type: "bit", nullable: true)
                 },
@@ -311,18 +357,17 @@ namespace doanapi.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ConstructionTypeId = table.Column<int>(type: "int", nullable: true),
-                    DistrictId = table.Column<int>(type: "int", nullable: true),
-                    CommuneId = table.Column<int>(type: "int", nullable: true),
+                    DVHCId = table.Column<int>(type: "int", nullable: true),
                     ConstructionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartDate = table.Column<double>(type: "float", nullable: true),
+                    StartDate = table.Column<double>(type: "float", nullable: false),
                     ConstructionLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    X = table.Column<double>(type: "float", nullable: true),
-                    Y = table.Column<double>(type: "float", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    X = table.Column<double>(type: "float", nullable: false),
+                    Y = table.Column<double>(type: "float", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true)
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -331,6 +376,11 @@ namespace doanapi.Migrations
                         name: "FK_Construction_ConstructionType_ConstructionTypeId",
                         column: x => x.ConstructionTypeId,
                         principalTable: "ConstructionType",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Construction_DonViHC_DVHCId",
+                        column: x => x.DVHCId,
+                        principalTable: "DonViHC",
                         principalColumn: "Id");
                 });
 
@@ -345,22 +395,22 @@ namespace doanapi.Migrations
                     MiningMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     MiningPurposes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ExploitedWater = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MachineCapacity = table.Column<int>(type: "int", nullable: true),
-                    FlowMax = table.Column<double>(type: "float", nullable: true),
-                    FlowTT = table.Column<double>(type: "float", nullable: true),
-                    MNC = table.Column<double>(type: "float", nullable: true),
-                    MNDL = table.Column<double>(type: "float", nullable: true),
-                    MNDBT = table.Column<double>(type: "float", nullable: true),
-                    MNCNTL = table.Column<double>(type: "float", nullable: true),
-                    NumberOfExploitation = table.Column<int>(type: "int", nullable: true),
-                    PracticeTime = table.Column<int>(type: "int", nullable: true),
+                    MachineCapacity = table.Column<int>(type: "int", nullable: false),
+                    FlowMax = table.Column<double>(type: "float", nullable: false),
+                    FlowTT = table.Column<double>(type: "float", nullable: false),
+                    MNC = table.Column<double>(type: "float", nullable: false),
+                    MNDL = table.Column<double>(type: "float", nullable: false),
+                    MNDBT = table.Column<double>(type: "float", nullable: false),
+                    MNCNTL = table.Column<double>(type: "float", nullable: false),
+                    NumberOfExploitation = table.Column<int>(type: "int", nullable: false),
+                    PracticeTime = table.Column<int>(type: "int", nullable: false),
                     WastewaterReceiving = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DischargeLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: true)
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -369,6 +419,54 @@ namespace doanapi.Migrations
                         name: "FK_ConstructionDetails_Construction_IdConstruction",
                         column: x => x.IdConstruction,
                         principalTable: "Construction",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "License",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdCon = table.Column<int>(type: "int", nullable: false),
+                    LicenseTypeId = table.Column<int>(type: "int", nullable: true),
+                    OrganizationId = table.Column<int>(type: "int", nullable: true),
+                    ConstructionId = table.Column<int>(type: "int", nullable: true),
+                    LicenseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SignDay = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EffectiveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Duration = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Signer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LicensingAuthorities = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileLicense = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileDocument = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FilePermission = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Revoked = table.Column<bool>(type: "bit", nullable: false),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_License", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_License_Construction_ConstructionId",
+                        column: x => x.ConstructionId,
+                        principalTable: "Construction",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_License_LicenseType_LicenseTypeId",
+                        column: x => x.LicenseTypeId,
+                        principalTable: "LicenseType",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_License_Organization_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organization",
                         principalColumn: "Id");
                 });
 
@@ -417,11 +515,31 @@ namespace doanapi.Migrations
                 column: "ConstructionTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Construction_DVHCId",
+                table: "Construction",
+                column: "DVHCId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ConstructionDetails_IdConstruction",
                 table: "ConstructionDetails",
                 column: "IdConstruction",
                 unique: true,
                 filter: "[IdConstruction] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_License_ConstructionId",
+                table: "License",
+                column: "ConstructionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_License_LicenseTypeId",
+                table: "License",
+                column: "LicenseTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_License_OrganizationId",
+                table: "License",
+                column: "OrganizationId");
         }
 
         /// <inheritdoc />
@@ -449,10 +567,10 @@ namespace doanapi.Migrations
                 name: "Dashboards");
 
             migrationBuilder.DropTable(
-                name: "DonViHC");
+                name: "Functions");
 
             migrationBuilder.DropTable(
-                name: "Functions");
+                name: "License");
 
             migrationBuilder.DropTable(
                 name: "Permissions");
@@ -473,7 +591,16 @@ namespace doanapi.Migrations
                 name: "Construction");
 
             migrationBuilder.DropTable(
+                name: "LicenseType");
+
+            migrationBuilder.DropTable(
+                name: "Organization");
+
+            migrationBuilder.DropTable(
                 name: "ConstructionType");
+
+            migrationBuilder.DropTable(
+                name: "DonViHC");
         }
     }
 }

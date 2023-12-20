@@ -3,14 +3,21 @@ using System.ComponentModel.DataAnnotations;
 
 namespace doanapi.Data
 {
-    public class LoaiCongTrinh
+    public class Organization
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int? IdParent { get; set; }
-        public string TypeName { get; set; }
-        public string ConstructionTypeCode { get; set; }
+        public string OrganizationName { get; set; }
+        public string Location { get; set; }
+        public string TaxCode { get; set; }
+        public string SDT { get; set; }
+        public string Fax { get; set; }
+        public string Email { get; set; }
+        public string Manager { get; set; }
+        public string AuthorizedPerson { get; set; }
+        public string LegalRepresentation { get; set; }
+        public string Account { get; set; }
         public DateTime CreationTime { get; set; } = DateTime.UtcNow;
         public string AccountCreated { get; set; }
         public DateTime RepairTime { get; set; }
@@ -18,6 +25,6 @@ namespace doanapi.Data
         public bool Deleted { get; set; }
 
         // Navigation property to represent the relationship
-        public virtual ICollection<CongTrinh> CongTrinh { get; set; }
+        public virtual ICollection<License> License { get; set; }
     }
 }

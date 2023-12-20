@@ -30,6 +30,7 @@ namespace doanapi.Service
                 .Where(ct => ct.Deleted == false)
                 .Include(ct => ct.ConstructionType)
                 .Include(ct => ct.ConstructionDetails)
+                .Include(ct => ct.DonViHC)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
                 .OrderBy(x => x.ConstructionTypeId)
@@ -45,17 +46,6 @@ namespace doanapi.Service
             {
                 query = query.Where(ct => ConstructionTypeId == 1 || ConstructionTypeId == 2 || ConstructionTypeId == 3 ? ct.ConstructionType!.IdParent == ConstructionTypeId : ct.ConstructionType!.Id == ConstructionTypeId);
             }
-
-            if (CommuneId > 0)
-            {
-                query = query.Where(ct => ct.CommuneId == (CommuneId));
-            }
-
-            if (DistrictId > 0)
-            {
-                query = query.Where(ct => ct.DistrictId==(DistrictId));
-            }
-           
 
             var congtrinh = await query.ToListAsync();
 

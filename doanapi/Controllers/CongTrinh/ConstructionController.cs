@@ -1,6 +1,7 @@
 ﻿using doanapi.Data;
 using doanapi.Dto;
 using doanapi.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace doanapi.Controllers
@@ -19,6 +20,7 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("list")]
+        //[Authorize(Roles = "chuyenvien")]
         public async Task<List<ConstructionDto>> GetAllData(string? ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
         {
             return await _service.GetAllAsync(ConstructionName, ConstructionTypeId, DistrictId, CommuneId);

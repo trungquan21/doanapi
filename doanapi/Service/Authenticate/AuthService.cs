@@ -74,91 +74,25 @@ namespace doanapi.Service
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.Name, user.UserName ?? ""),
                 new Claim(ClaimTypes.NameIdentifier, user.FullName ?? ""),
+                
             };
-
-            var addedPermissions = new HashSet<string>(); // Sử dụng HashSet để lưu trữ các quyền đã thêm vào danh sách
-
-            foreach (var role in roles)
-            {
-
-                claims.Add(new Claim(ClaimTypes.Role, role));
-
-                // Lấy danh sách quyền thuộc vai trò
-                var rolePermissions = await _context.Permissions!.Where(p => p.RoleName == role).ToListAsync();
-
-                // Thêm quyền vào danh sách claims
-                foreach (var permission in rolePermissions)
-                {
-                    // Lấy thông tin dashSrc từ SQL
-                    var dashSrc = await _context.Dashboards!.Where(d => d.Id == permission.DashboardId).Select(d => d.Path).FirstOrDefaultAsync();
-
-                    // Tạo một quyền dưới dạng đối tượng JSON
-                    var permissionObject = new
-                    {
-                        funcCode = permission.FunctionCode,
-                        dashSrc = dashSrc!
-                    };
-
-                    var permissionJson = JsonConvert.SerializeObject(permissionObject);
-
-                    // Kiểm tra xem quyền đã được thêm vào danh sách chưa
-                    if (!addedPermissions.Contains(permissionJson))
-                    {
-                        // Thêm quyền vào danh sách claims
-                        var permissionClaim = new Claim("Permission", permissionJson);
-                        claims.Add(permissionClaim);
-
-                        // Đánh dấu quyền đã được thêm vào danh sách
-                        addedPermissions.Add(permissionJson);
-                    }
-                }
-            }
-
-            // Lấy danh sách quyền theo tên người dùng
-            var userPermissions = await _context.Permissions!.Where(p => p.UserName == user.UserName).ToListAsync();
-
-            // Thêm quyền vào danh sách claims
-            foreach (var permission in userPermissions)
-            {
-                // Lấy thông tin dashSrc từ SQL
-                var dashSrc = await _context.Dashboards!.Where(d => d.Id == permission.DashboardId).Select(d => d.Path).FirstOrDefaultAsync();
-
-                // Tạo một quyền dưới dạng đối tượng JSON
-                var permissionObject = new
-                {
-                    funcCode = permission.FunctionCode,
-                    dashSrc = dashSrc!
-                };
-
-                var permissionJson = JsonConvert.SerializeObject(permissionObject);
-
-                // Kiểm tra xem quyền đã được thêm vào danh sách chưa
-                if (!addedPermissions.Contains(permissionJson))
-                {
-                    // Thêm quyền vào danh sách claims
-                    var permissionClaim = new Claim("Permission", permissionJson);
-                    claims.Add(permissionClaim);
-
-                    // Đánh dấu quyền đã được thêm vào danh sách
-                    addedPermissions.Add(permissionJson);
-                }
-            }
-
+            claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? ""));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddDays(7),
-                signingCredentials: creds
-            );
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = creds
+            };
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenHandle = new JwtSecurityTokenHandler();
 
-            return JsonConvert.SerializeObject(jwt);
+            var token = tokenHandle.CreateToken(tokenDescriptor);
+
+            return tokenHandle.WriteToken(token);
         }
 
 

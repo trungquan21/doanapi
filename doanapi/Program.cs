@@ -6,6 +6,7 @@ using doanapi.Data;
 using doanapi.Service;
 using System.Text;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -134,5 +135,19 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+try
+{
+    using var scope = app.Services.CreateScope();
+    var dbcontext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    var usermanage = scope.ServiceProvider.GetRequiredService<UserManager<AspNetUsers>>();
+    var rolemanage = scope.ServiceProvider.GetRequiredService<RoleManager<AspNetRoles>>();
+    await dbcontext.Database.MigrateAsync();
+    await Seed.SeedData(dbcontext, usermanage, rolemanage);
+}
+catch
+{
+    throw;
+}
 
 app.Run();
