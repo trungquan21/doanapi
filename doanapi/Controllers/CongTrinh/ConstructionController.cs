@@ -19,9 +19,9 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<ConstructionDto>> GetAllData(string? ConstructionName, int? ConstructionId, int? DistrictId, int? CommuneId)
+        public async Task<List<ConstructionDto>> GetAllData(string? ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
         {
-            return await _service.GetAllAsync(ConstructionName, ConstructionId, DistrictId, CommuneId);
+            return await _service.GetAllAsync(ConstructionName, ConstructionTypeId, DistrictId, CommuneId);
         }
 
         [HttpGet]
@@ -32,7 +32,7 @@ namespace doanapi.Controllers
         }
 
         [HttpPost]
-        [Route("luu")]
+        [Route("save")]
         public async Task<ActionResult<CongTrinh>> Save(ConstructionDto dto)
         {
             var res = await _service.SaveAsync(dto);
@@ -47,7 +47,7 @@ namespace doanapi.Controllers
         }
 
         [HttpGet]
-        [Route("xoa/{Id}")]
+        [Route("delete/{Id}")]
         public async Task<ActionResult<CongTrinh>> Delete(int Id)
         {
             var res = await _service.DeleteAsync(Id);

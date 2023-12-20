@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace doanapi.Migrations
 {
     /// <inheritdoc />
-    public partial class CongTrinh : Migration
+    public partial class initdatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,7 +72,7 @@ namespace doanapi.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdParent = table.Column<int>(type: "int", nullable: true),
                     TypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConstructionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConstructionTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RepairTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -310,7 +310,7 @@ namespace doanapi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ConstructionId = table.Column<int>(type: "int", nullable: true),
+                    ConstructionTypeId = table.Column<int>(type: "int", nullable: true),
                     DistrictId = table.Column<int>(type: "int", nullable: true),
                     CommuneId = table.Column<int>(type: "int", nullable: true),
                     ConstructionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -328,8 +328,8 @@ namespace doanapi.Migrations
                 {
                     table.PrimaryKey("PK_Construction", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Construction_ConstructionType_ConstructionId",
-                        column: x => x.ConstructionId,
+                        name: "FK_Construction_ConstructionType_ConstructionTypeId",
+                        column: x => x.ConstructionTypeId,
                         principalTable: "ConstructionType",
                         principalColumn: "Id");
                 });
@@ -412,9 +412,9 @@ namespace doanapi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Construction_ConstructionId",
+                name: "IX_Construction_ConstructionTypeId",
                 table: "Construction",
-                column: "ConstructionId");
+                column: "ConstructionTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConstructionDetails_IdConstruction",

@@ -276,14 +276,14 @@ namespace doanapi.Migrations
                     b.Property<int?>("CommuneId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ConstructionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConstructionLocation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConstructionName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ConstructionTypeId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("CreationTime")
                         .HasColumnType("datetime2");
@@ -311,7 +311,7 @@ namespace doanapi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConstructionId");
+                    b.HasIndex("ConstructionTypeId");
 
                     b.ToTable("Construction");
                 });
@@ -438,7 +438,7 @@ namespace doanapi.Migrations
                     b.Property<string>("AccountCreated")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ConstructionId")
+                    b.Property<string>("ConstructionTypeCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreationTime")
@@ -690,11 +690,11 @@ namespace doanapi.Migrations
 
             modelBuilder.Entity("doanapi.Data.CongTrinh", b =>
                 {
-                    b.HasOne("doanapi.Data.LoaiCongTrinh", "TypeOfConstruction")
+                    b.HasOne("doanapi.Data.LoaiCongTrinh", "ConstructionType")
                         .WithMany("CongTrinh")
-                        .HasForeignKey("ConstructionId");
+                        .HasForeignKey("ConstructionTypeId");
 
-                    b.Navigation("TypeOfConstruction");
+                    b.Navigation("ConstructionType");
                 });
 
             modelBuilder.Entity("doanapi.Data.ThongSoCongTrinh", b =>

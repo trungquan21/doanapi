@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace doanapi.Controllers
 {
-    [Route("api/TypeOfConstruction")]
+    [Route("api/ConstructionType")]
     [ApiController]
     //[Authorize]
     public class ConstructionTypeController : ControllerBase
@@ -48,7 +48,7 @@ namespace doanapi.Controllers
         }
 
         [HttpGet]
-        [Route("xoa/{Id}")]
+        [Route("delete/{Id}")]
         public async Task<ActionResult<LoaiCongTrinh>> Delete(int Id)
         {
             var res = await _service.DeleteAsync(Id);

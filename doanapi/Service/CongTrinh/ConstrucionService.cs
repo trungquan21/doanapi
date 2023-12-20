@@ -24,15 +24,15 @@ namespace doanapi.Service
         }
 
         // Method to retrieve a list of ConstructionDetails entities based on specified filters
-        public async Task<List<ConstructionDto>> GetAllAsync(string? ConstructionName, int? ConstructionId, int? DistrictId, int? CommuneId)
+        public async Task<List<ConstructionDto>> GetAllAsync(string? ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
         {
             var query = _context.Construction!
                 .Where(ct => ct.Deleted == false)
-                .Include(ct => ct.TypeOfConstruction)
+                .Include(ct => ct.ConstructionType)
                 .Include(ct => ct.ConstructionDetails)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
-                .OrderBy(x => x.ConstructionId)
+                .OrderBy(x => x.ConstructionTypeId)
                 .AsQueryable();
 
             // Apply filters based on input parameters
@@ -41,9 +41,9 @@ namespace doanapi.Service
                 query = query.Where(ct => ct.ConstructionName!.Contains(ConstructionName));
             }
 
-            if (ConstructionId > 0)
+            if (ConstructionTypeId > 0)
             {
-                query = query.Where(ct => ConstructionId == 1 || ConstructionId == 2 || ConstructionId == 3 || ConstructionId == 24 ? ct.TypeOfConstruction!.IdParent == ConstructionId : ct.TypeOfConstruction!.Id == ConstructionId);
+                query = query.Where(ct => ConstructionTypeId == 1 || ConstructionTypeId == 2 || ConstructionTypeId == 3 ? ct.ConstructionType!.IdParent == ConstructionTypeId : ct.ConstructionType!.Id == ConstructionTypeId);
             }
 
             if (CommuneId > 0)
@@ -98,11 +98,11 @@ namespace doanapi.Service
         {
             var query = _context.Construction!
                 .Where(ct => ct.Deleted == false && ct.Id == Id)
-                .Include(ct => ct.ConstructionId)
+                .Include(ct => ct.ConstructionTypeId)
                 .Include(ct => ct.ConstructionDetails)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
-                .OrderBy(x => x.ConstructionId)
+                .OrderBy(x => x.ConstructionTypeId)
                 .AsQueryable();
 
             var congtrinh = query.FirstOrDefault();

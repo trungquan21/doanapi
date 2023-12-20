@@ -50,7 +50,7 @@ namespace doanapi.Helpers
             CreateMap<LoaiCongTrinh, ConstructionTypeDto>().ReverseMap();
             CreateMap<ThongSoCongTrinh, ConstructionDetailsDto>().ReverseMap();
             CreateMap<CongTrinh, ConstructionDto>()
-                .ForMember(dest => dest.ConstructionId, opt => opt.MapFrom(src => src.ConstructionId))
+                .ForMember(dest => dest.ConstructionType, opt => opt.MapFrom(src => src.ConstructionType))
                 .ForMember(dest => dest.ConstructionDetails, opt => opt.MapFrom(src => src.ConstructionDetails))
                 .ForMember(dest => dest.DonViHanhChinh, opt => opt.MapFrom((src, dest) => dest.DonViHanhChinh))
                 //.ForMember(dest => dest.giayphep, opt => opt.MapFrom(src => src.GiayPhep))

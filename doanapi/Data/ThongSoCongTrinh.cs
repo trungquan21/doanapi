@@ -33,6 +33,8 @@ namespace doanapi.Data
         public DateTime? RepairTime { get; set; }
         public string? EditAccount { get; set; }
         public bool? Deleted { get; set; }
+
+        //tao khoa ngoai voi cong trinh
         [ForeignKey("IdConstruction")]
         public virtual CongTrinh? ConstructionDetail { get; set; }
 

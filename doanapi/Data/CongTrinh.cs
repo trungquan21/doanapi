@@ -9,7 +9,7 @@ namespace doanapi.Data
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int? ConstructionId { get; set; }
+        public int? ConstructionTypeId { get; set; }
         public int? DistrictId { get; set; }
         public int? CommuneId { get; set; }
         public string? ConstructionName { get; set; }
@@ -23,9 +23,10 @@ namespace doanapi.Data
         public string? EditAccount { get; set; }
         public bool? Deleted { get; set; }
 
+        //tao khoa ngoai voi loai cong trinh
+        [ForeignKey("ConstructionTypeId")]
+        public virtual LoaiCongTrinh? ConstructionType { get; set; }
 
-        [ForeignKey("ConstructionId")]
-        public virtual LoaiCongTrinh? TypeOfConstruction { get; set; }
         public virtual ThongSoCongTrinh? ConstructionDetails { get; set; }
 
     }
