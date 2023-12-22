@@ -9,11 +9,10 @@ namespace doanapi.Data
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int? ConstructionTypeId { get; set; }
-        public int? DVHCId { get; set; }
-
+        public int ConstructionTypeId { get; set; }
+        public int DVHCId { get; set; }
         public string ConstructionName { get; set; }
-        public double StartDate { get; set; }
+        public int StartDate { get; set; }
         public string ConstructionLocation { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
@@ -29,7 +28,7 @@ namespace doanapi.Data
        
         [ForeignKey(nameof(DVHCId))]
         public virtual DonViHC DonViHC { get; set; }
-
+        public virtual ICollection<License> License { get; set; }
         public virtual ThongSoCongTrinh ConstructionDetails { get; set; }
 
     }

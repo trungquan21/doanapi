@@ -53,11 +53,19 @@ namespace doanapi.Helpers
                 .ForMember(dest => dest.ConstructionType, opt => opt.MapFrom(src => src.ConstructionType))
                 .ForMember(dest => dest.ConstructionDetails, opt => opt.MapFrom(src => src.ConstructionDetails))
                 .ForMember(dest => dest.DonViHanhChinh, opt => opt.MapFrom((src, dest) => dest.DonViHanhChinh))
-                //.ForMember(dest => dest.giayphep, opt => opt.MapFrom(src => src.GiayPhep))
+            //.ForMember(dest => dest.giayphep, opt => opt.MapFrom(src => src.GiayPhep))
             .ReverseMap();
             CreateMap<DonViHC, DonViHCDto>().ReverseMap();
             CreateMap<DonViHC, HuyenDto>().ReverseMap();
             CreateMap<DonViHC, XaDto>().ReverseMap();
+            CreateMap<LicenseType, LicenseTypeDto>().ReverseMap();
+            CreateMap<License, LicenseDto>()
+                .ForMember(dest => dest.Organization, opt => opt.MapFrom(src => src.Organization))
+                .ForMember(dest => dest.LicenseType, opt => opt.MapFrom(src => src.LicenseType))
+                .ForMember(dest => dest.Construction, opt => opt.MapFrom(src => src.Construction))
+                //.ForMember(dest => dest.tiencq, opt => opt.MapFrom((src, dest) => dest.tiencq))
+                .ReverseMap();
+            CreateMap<Organization, OrganizationDto>().ReverseMap();
 
         }
     }

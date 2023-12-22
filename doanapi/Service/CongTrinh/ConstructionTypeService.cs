@@ -33,7 +33,7 @@ namespace doanapi.Service
         }
 
         // Method to retrieve a specific ConstructionType entity by Id
-        public async Task<ConstructionTypeDto?> GetByIdAsync(int Id)
+        public async Task<ConstructionTypeDto> GetByIdAsync(int Id)
         {
             // Find the ConstructionType entity by Id
             var item = await _context.ConstructionType!.FindAsync(Id);

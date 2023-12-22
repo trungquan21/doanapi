@@ -113,7 +113,7 @@ namespace doanapi.Service
             return _mapper.Map<List<UserDashboardModel>>(userDashboards);
         }
 
-        public async Task<DashboardModel?> GetDashboardByIdAsync(int Id)
+        public async Task<DashboardModel> GetDashboardByIdAsync(int Id)
         {
             var item = await _context!.Dashboards!.FindAsync(Id);
             var dash = _mapper.Map<DashboardModel>(item);

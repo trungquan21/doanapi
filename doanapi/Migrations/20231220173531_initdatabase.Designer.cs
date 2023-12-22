@@ -13,7 +13,7 @@ namespace doanapi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20231220173531_initdatabase")]
-    partial class initdatabase
+    partial class InitDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

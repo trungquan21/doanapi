@@ -24,7 +24,7 @@ namespace doanapi.Service
         }
 
         // Method to retrieve a list of ConstructionDetails entities based on specified filters
-        public async Task<List<ConstructionDto>> GetAllAsync(string? ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
+        public async Task<List<ConstructionDto>> GetAllAsync(string ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
         {
             var query = _context.Construction!
                 .Where(ct => ct.Deleted == false)
@@ -57,11 +57,11 @@ namespace doanapi.Service
             {
                
 
-                if (dto.CommuneId != 0)
-                {
-                    dto.DonViHanhChinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
-                        .FirstOrDefaultAsync(dv => dv.CommuneId == dto.CommuneId));
-                }
+                //if (dto.CommuneId != 0)
+                //{
+                //    dto.DonViHanhChinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
+                //        .FirstOrDefaultAsync(dv => dv.CommuneId == dto.CommuneId));
+                //}
 
                 //dto.giayphep = _mapper.Map<List<GP_ThongTinDto>>(dto.giayphep!.Where(x => x.DaXoa == false));
 
@@ -84,7 +84,7 @@ namespace doanapi.Service
         }
 
         // Method to retrieve a single Construction entity by Id
-        public async Task<ConstructionDto?> GetByIdAsync(int Id)
+        public async Task<ConstructionDto> GetByIdAsync(int Id)
         {
             var query = _context.Construction!
                 .Where(ct => ct.Deleted == false && ct.Id == Id)
@@ -102,11 +102,11 @@ namespace doanapi.Service
 
             // Further processing on the DTO
            
-            if (congTrinhDto.CommuneId != 0)
-            {
-                congTrinhDto.DonViHanhChinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
-                    .FirstOrDefaultAsync(dv => dv.CommuneId == congTrinhDto.CommuneId));
-            }
+            //if (congTrinhDto.CommuneId != 0)
+            //{
+            //    congTrinhDto.DonViHanhChinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
+            //        .FirstOrDefaultAsync(dv => dv.CommuneId == congTrinhDto.CommuneId));
+            //}
 
             //congTrinhDto.giayphep = _mapper.Map<List<GP_ThongTinDto>>(congTrinhDto.giayphep!.Where(x => x.DaXoa == false));
 
@@ -132,7 +132,7 @@ namespace doanapi.Service
         {
             int id = 0;
             var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
-            CongTrinh? item = null; // Declare item variable
+            CongTrinh item = null; // Declare item variable
 
             // Retrieve an existing item based on Id or if dto.Id is 0
             var existingItem = await _context.Construction!.FirstOrDefaultAsync(d => d.Id == dto.Id && d.Deleted == false);

@@ -24,7 +24,7 @@ namespace doanapi.Service
             return _mapper.Map<List<PermissionModel>>(items);
         }
 
-        public async Task<PermissionModel?> GetPermissionByIdAsync(int Id)
+        public async Task<PermissionModel> GetPermissionByIdAsync(int Id)
         {
             var item = await _context.Permissions!.FindAsync(Id);
             return _mapper.Map<PermissionModel>(item);

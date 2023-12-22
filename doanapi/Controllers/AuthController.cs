@@ -1,4 +1,5 @@
-﻿using doanapi.Service;
+﻿using doanapi.Models.Authenticate;
+using doanapi.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,10 @@ namespace doanapi.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
-        public async Task<string> Login(string email,string password)
+        public async Task<string> Login(LoginViewModel loginViewModel)
+
         {
-            return await authService.LoginAsync(new Models.Authenticate.LoginViewModel { UserName=email, Password = password });
+            return await authService.LoginAsync(loginViewModel);
         } 
     }
 }

@@ -20,15 +20,15 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("list")]
-        //[Authorize(Roles = "chuyenvien")]
-        public async Task<List<ConstructionDto>> GetAllData(string? ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
+        [Authorize(Roles = "chuyenvien,admin")]
+        public async Task<List<ConstructionDto>> GetAllData(string ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
         {
             return await _service.GetAllAsync(ConstructionName, ConstructionTypeId, DistrictId, CommuneId);
         }
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<ConstructionDto?> GetOneData(int Id)
+        public async Task<ConstructionDto> GetOneData(int Id)
         {
             return await _service.GetByIdAsync(Id);
         }

@@ -68,7 +68,7 @@ namespace doanapi.Service
             return listItems;
         }
 
-        public async Task<DonViHCDto?> GetByIdAsync(int Id)
+        public async Task<DonViHCDto> GetByIdAsync(int Id)
         {
             var item = await _context.DonViHC!.FindAsync(Id);
             return _mapper.Map<DonViHCDto>(item);

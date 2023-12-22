@@ -27,7 +27,7 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<ConstructionTypeDto?> GetById(int Id)
+        public async Task<ConstructionTypeDto> GetById(int Id)
         {
             return await _service.GetByIdAsync(Id);
         }
