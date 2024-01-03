@@ -9,6 +9,7 @@ namespace doanapi.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int? IdConstruction { get; set; }
+        public int StartDate { get; set; }
         public string MiningMode { get; set; }
         public string MiningMethod { get; set; }
         public string MiningPurposes { get; set; }
@@ -28,9 +29,9 @@ namespace doanapi.Data
         public string WastewaterReceiving { get; set; }
         public string DischargeLocation { get; set; }
 
-        public DateTime CreationTime { get; set; }
+        public DateTime? CreationTime { get; set; }
         public string AccountCreated { get; set; }
-        public DateTime RepairTime { get; set; }
+        public DateTime? RepairTime { get; set; }
         public string EditAccount { get; set; }
         public bool Deleted { get; set; }
 

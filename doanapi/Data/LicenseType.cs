@@ -10,7 +10,7 @@ namespace doanapi.Data
         public int Id { get; set; }
         public string LicenseTypeName { get; set; }
         public string LicenseTypeCode { get; set; }
-        public DateTime CreationTime { get; set; }
+        public DateTime? CreationTime { get; set; }
         public string AccountCreated { get; set; }
         public DateTime? RepairTime { get; set; }
         public string EditAccount { get; set; }

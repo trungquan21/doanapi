@@ -30,7 +30,6 @@ namespace doanapi.Service
                 .Where(ct => ct.Deleted == false)
                 .Include(ct => ct.ConstructionType)
                 .Include(ct => ct.ConstructionDetails)
-                .Include(ct => ct.DonViHC)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
                 .OrderBy(x => x.ConstructionTypeId)

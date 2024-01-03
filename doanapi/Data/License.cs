@@ -24,9 +24,9 @@ namespace doanapi.Data
         public string FileDocument { get; set; }
         public string FilePermission { get; set; }
         public bool Revoked { get; set; }
-        public DateTime CreationTime { get; set; }
+        public DateTime? CreationTime { get; set; }
         public string AccountCreated { get; set; }
-        public DateTime RepairTime { get; set; }
+        public DateTime? RepairTime { get; set; }
         public string EditAccount { get; set; }
         public bool Deleted { get; set; }
 
