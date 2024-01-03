@@ -2,9 +2,9 @@
 {
     public class ConstructionDetailsDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int? IdConstruction { get; set; }
-        public int StartDate { get; set; }
+        public int? StartDate { get; set; }
         public string MiningMode { get; set; }
         public string MiningMethod { get; set; }
         public string MiningPurposes { get; set; }

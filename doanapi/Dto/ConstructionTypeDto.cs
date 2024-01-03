@@ -2,7 +2,7 @@
 {
     public class ConstructionTypeDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int? IdParent { get; set; }
         public string TypeName { get; set; }
         public string ConstructionTypeCode { get; set; }

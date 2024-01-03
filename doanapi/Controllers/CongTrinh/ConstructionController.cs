@@ -8,7 +8,7 @@ namespace doanapi.Controllers
 {
     [Route("api/Construction")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ConstructionController : ControllerBase
     {
         private readonly ConstrucionService _service;
@@ -20,7 +20,7 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("list")]
-        [Authorize(Roles = "chuyenvien,admin")]
+        //[Authorize(Roles = "chuyenvien,admin")]
         public async Task<List<ConstructionDto>> GetAllData(string ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
         {
             return await _service.GetAllAsync(ConstructionName, ConstructionTypeId, DistrictId, CommuneId);

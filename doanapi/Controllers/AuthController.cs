@@ -16,12 +16,17 @@ namespace doanapi.Controllers
         {
             this.authService = authService;
         }
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<string> Login(LoginViewModel loginViewModel)
 
+        [HttpPost]
+        [Route("login")]
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
-            return await authService.LoginAsync(loginViewModel);
-        } 
+            var res = await authService.LoginAsync(model);
+            if (string.IsNullOrEmpty(res))
+            {
+                return BadRequest(new { message = "Thông tin tài khoản hoặc mật khẩu không chính xác", error = true });
+            }
+            return Ok(res);
+        }
     }
 }
