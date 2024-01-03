@@ -18,7 +18,7 @@ namespace doanapi.Data
         public string AuthorizedPerson { get; set; }
         public string LegalRepresentation { get; set; }
         public string Account { get; set; }
-        public DateTime CreationTime { get; set; } = DateTime.UtcNow;
+        public DateTime CreationTime { get; set; }
         public string AccountCreated { get; set; }
         public DateTime RepairTime { get; set; }
         public string EditAccount { get; set; }

@@ -16,7 +16,7 @@ namespace doanapi.Data
         public string ConstructionLocation { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
-        public DateTime CreationTime { get; set; } = DateTime.UtcNow;
+        public DateTime CreationTime { get; set; }
         public string AccountCreated { get; set; }
         public DateTime RepairTime { get; set; } 
         public string EditAccount { get; set; }
