@@ -46,7 +46,7 @@ namespace doanapi.Service
             var items = await _context.Commune!
                 .Where(l => l.DistrictId == DistrictId )
                 .ToListAsync();
-
+            if (items != null) return new List<CommuneDto>();
             var listItems = _mapper.Map<List<CommuneDto>>(items);
             return listItems;
         }

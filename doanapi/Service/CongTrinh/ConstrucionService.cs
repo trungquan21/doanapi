@@ -30,6 +30,8 @@ namespace doanapi.Service
                 .Where(ct => ct.Deleted == false)
                 .Include(ct => ct.ConstructionType)
                 .Include(ct => ct.ConstructionDetails)
+                 .Include(ct => ct.Commune)
+                 .Include(ct => ct.District)
                 .OrderBy(x => x.ConstructionTypeId)
                 .AsQueryable();
 
