@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace doanapi.Data
 {
-    public class ThongSoCongTrinh
+    public class ConstructionDetail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -37,7 +37,7 @@ namespace doanapi.Data
 
         //tao khoa ngoai voi cong trinh
         [ForeignKey("IdConstruction")]
-        public virtual CongTrinh ConstructionDetail { get; set; }
+        public virtual Construction Construction { get; set; }
 
     }
 }

@@ -30,8 +30,6 @@ namespace doanapi.Service
                 .Where(ct => ct.Deleted == false)
                 .Include(ct => ct.ConstructionType)
                 .Include(ct => ct.ConstructionDetails)
-                //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
-                //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
                 .OrderBy(x => x.ConstructionTypeId)
                 .AsQueryable();
 
@@ -45,6 +43,15 @@ namespace doanapi.Service
             {
                 query = query.Where(ct => ConstructionTypeId == 1 || ConstructionTypeId == 2 || ConstructionTypeId == 3 ? ct.ConstructionType!.IdParent == ConstructionTypeId : ct.ConstructionType!.Id == ConstructionTypeId);
             }
+            if (CommuneId > 0)
+            {
+                query = query.Where(ct => ct.Commune.CommuneId == CommuneId);
+            }
+
+            if (DistrictId > 0)
+            {
+                query = query.Where(ct => ct.District.DistrictId == DistrictId);
+            }
 
             var congtrinh = await query.ToListAsync();
 
@@ -54,15 +61,13 @@ namespace doanapi.Service
             // Further processing on DTOs
             foreach (var dto in congTrinhDtos)
             {
-               
+                if (dto.CommuneId != 0)
+                {
+                    dto.Communes = _mapper.Map<CommuneDto>(await _context.Commune!
+                        .FirstOrDefaultAsync(dv => dv.CommuneId == dto.CommuneId));
+                }
 
-                //if (dto.CommuneId != 0)
-                //{
-                //    dto.DonViHanhChinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
-                //        .FirstOrDefaultAsync(dv => dv.CommuneId == dto.CommuneId));
-                //}
-
-                //dto.giayphep = _mapper.Map<List<GP_ThongTinDto>>(dto.giayphep!.Where(x => x.DaXoa == false));
+                dto.Licenses = _mapper.Map<List<LicenseDto>>(dto.Licenses!.Where(x => x.Deleted == false));
 
                 //foreach (var dtoGP in dto.giayphep)
                 //{
@@ -131,7 +136,7 @@ namespace doanapi.Service
         {
             int id = 0;
             var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
-            CongTrinh item = null; // Declare item variable
+            Construction item = null; // Declare item variable
 
             // Retrieve an existing item based on Id or if dto.Id is 0
             var existingItem = await _context.Construction!.FirstOrDefaultAsync(d => d.Id == dto.Id && d.Deleted == false);
@@ -139,7 +144,7 @@ namespace doanapi.Service
             if (existingItem == null || dto.Id == 0)
             {
                 // If the item doesn't exist or dto.Id is 0, create a new item
-                item = _mapper.Map<CongTrinh>(dto);
+                item = _mapper.Map<Construction>(dto);
                 item.Deleted = false;
                 item.CreationTime = DateTime.Now;
                 item.AccountCreated = currentUser != null ? currentUser.UserName : null;

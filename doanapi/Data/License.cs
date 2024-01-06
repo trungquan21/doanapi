@@ -35,7 +35,7 @@ namespace doanapi.Data
         public virtual LicenseType LicenseType { get; set; }
 
         [ForeignKey("ConstructionId")]
-        public virtual CongTrinh Construction { get; set; }
+        public virtual Construction Construction { get; set; }
 
         [ForeignKey("OrganizationId")]
         public virtual Organization Organization { get; set; }

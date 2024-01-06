@@ -20,53 +20,25 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("district/list")]
-        public async Task<List<HuyenDto>> GetAllDistricts()
+        public async Task<List<DistrictDto>> GetAllDistricts()
         {
             return (await _service.GetAllDistrictAsync());
         }
 
         [HttpGet]
         [Route("commune/list")]
-        public async Task<List<XaDto>> GetAllCommunes()
+        public async Task<List<CommuneDto>> GetAllCommunes()
         {
             return (await _service.GetAllCommuneAsync());
         }
 
         [HttpGet]
         [Route("commune/list/{DistrictId}")]
-        public async Task<List<XaDto>> GetAllCommunesByDistrict(int DistrictId)
+        public async Task<List<CommuneDto>> GetAllCommunesByDistrict(int DistrictId)
         {
             return (await _service.GetAllCommuneByDistrictAsync(DistrictId));
         } 
 
-        [HttpPost]
-        [Route("save")]
-        public async Task<ActionResult<DonViHC>> Save(DonViHCDto moddel)
-        {
-            var res = await _service.SaveAsync(moddel);
-            if (res == true)
-            {
-                return Ok(new { message = "Dữ liệu đã được lưu" });
-            }
-            else
-            {
-                return BadRequest(new { message = "Lỗi lưu dữ liệu", error = true });
-            }
-        }
-
-        [HttpGet]
-        [Route("delete/{Id}")]
-        public async Task<ActionResult<DonViHC>> Delete(int Id)
-        {
-            var res = await _service.DeleteAsync(Id);
-            if (res == true)
-            {
-                return Ok(new { message = "Dữ liệu đã được xóa" });
-            }
-            else
-            {
-                return BadRequest(new { message = "Lỗi xóa dữ liệu", error = true });
-            }
-        }
+  
     }
 }

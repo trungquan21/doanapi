@@ -8,7 +8,7 @@ namespace doanapi.Controllers
 {
     [Route("api/Construction")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ConstructionController : ControllerBase
     {
         private readonly ConstrucionService _service;
@@ -21,9 +21,9 @@ namespace doanapi.Controllers
         [HttpGet]
         [Route("list")]
         //[Authorize(Roles = "chuyenvien,admin")]
-        public async Task<List<ConstructionDto>> GetAllData(string ConstructionName, int? ConstructionTypeId, int? DistrictId, int? CommuneId)
+        public async Task<List<ConstructionDto>> GetAllData(string ConstructionName, int? ConstructionTypeId, int? District, int? Commune)
         {
-            return await _service.GetAllAsync(ConstructionName, ConstructionTypeId, DistrictId, CommuneId);
+            return await _service.GetAllAsync(ConstructionName, ConstructionTypeId, District, Commune);
         }
 
         [HttpGet]
@@ -35,7 +35,7 @@ namespace doanapi.Controllers
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult<CongTrinh>> Save(ConstructionDto dto)
+        public async Task<ActionResult<Construction>> Save(ConstructionDto dto)
         {
             var res = await _service.SaveAsync(dto);
             if (res > 0)
@@ -50,7 +50,7 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("delete/{Id}")]
-        public async Task<ActionResult<CongTrinh>> Delete(int Id)
+        public async Task<ActionResult<Construction>> Delete(int Id)
         {
             var res = await _service.DeleteAsync(Id);
             if (res == true)

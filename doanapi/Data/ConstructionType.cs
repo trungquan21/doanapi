@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace doanapi.Data
 {
-    public class LoaiCongTrinh
+    public class ConstructionType
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,6 +18,6 @@ namespace doanapi.Data
         public bool Deleted { get; set; }
 
         // Navigation property to represent the relationship
-        public virtual ICollection<CongTrinh> CongTrinh { get; set; }
+        public virtual ICollection<Construction> CongTrinh { get; set; }
     }
 }

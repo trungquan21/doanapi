@@ -53,7 +53,7 @@ namespace doanapi.Service
             if (existingItem == null || dto.Id == 0)
             {
                 // If the item doesn't exist or dto.Id is 0, create a new item
-                var newItem = _mapper.Map<LoaiCongTrinh>(dto);
+                var newItem = _mapper.Map<ConstructionType>(dto);
                 newItem.Deleted = false;
                 newItem.CreationTime = DateTime.Now;
                 newItem.AccountCreated = currentUser != null ? currentUser.UserName : null;

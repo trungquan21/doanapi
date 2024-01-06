@@ -47,16 +47,17 @@ namespace doanapi.Helpers
             CreateMap<Functions, FunctionModel>().ReverseMap();
 
             //-------------Other mapper--------------------
-            CreateMap<LoaiCongTrinh, ConstructionTypeDto>().ReverseMap();
-            CreateMap<ThongSoCongTrinh, ConstructionDetailsDto>().ReverseMap();
-            CreateMap<CongTrinh, ConstructionDto>()
+            CreateMap<ConstructionType, ConstructionTypeDto>().ReverseMap();
+            CreateMap<ConstructionDetail, ConstructionDetailsDto>().ReverseMap();
+            CreateMap<Construction, ConstructionDto>()
                 .ForMember(dest => dest.ConstructionType, opt => opt.MapFrom(src => src.ConstructionType))
                 .ForMember(dest => dest.ConstructionDetails, opt => opt.MapFrom(src => src.ConstructionDetails))
-            //.ForMember(dest => dest.giayphep, opt => opt.MapFrom(src => src.GiayPhep))
+                .ForMember(dest => dest.Districts, opt => opt.MapFrom(src => src.District))
+                .ForMember(dest => dest.Licenses, opt => opt.MapFrom(src => src.License))
             .ReverseMap();
-            CreateMap<DonViHC, DonViHCDto>().ReverseMap();
-            CreateMap<DonViHC, HuyenDto>().ReverseMap();
-            CreateMap<DonViHC, XaDto>().ReverseMap();
+            CreateMap<District, DistrictDto>()
+                .ForMember(dest => dest.Communes, opt => opt.MapFrom(src => src.Communes)).ReverseMap();
+            CreateMap<Commune, CommuneDto>().ReverseMap();
             CreateMap<LicenseType, LicenseTypeDto>().ReverseMap();
             CreateMap<License, LicenseDto>()
                 .ForMember(dest => dest.Organization, opt => opt.MapFrom(src => src.Organization))

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using doanapi.Data;
+using System.ComponentModel.Design;
 
 namespace doanapi.Data
 {
@@ -28,10 +29,11 @@ namespace doanapi.Data
         public DbSet<Functions> Functions { get; set; }
 
         //Other database
-        public DbSet<LoaiCongTrinh> ConstructionType { get; set; }
-        public DbSet<CongTrinh> Construction { get; set; }
-        public DbSet<ThongSoCongTrinh> ConstructionDetails { get; set; }
-        public DbSet<DonViHC> DonViHC { get; set; }
+        public DbSet<ConstructionType> ConstructionType { get; set; }
+        public DbSet<Construction> Construction { get; set; }
+        public DbSet<ConstructionDetail> ConstructionDetails { get; set; }
+        public DbSet<District> District { get; set; }
+        public DbSet<Commune> Commune { get; set; }
 
         public DbSet<License> License { get; set; }
         public DbSet<LicenseType> LicenseType { get; set; }

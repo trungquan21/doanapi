@@ -34,7 +34,7 @@ namespace doanapi.Service
             if (existingItem == null || dto.Id == 0)
             {
                 // Create a new item if it doesn't exist or dto.Id is 0
-                var newItem = _mapper.Map<ThongSoCongTrinh>(dto);
+                var newItem = _mapper.Map<ConstructionDetail>(dto);
                 // Set nullable properties to null if their values are 0
                 if (dto.IdConstruction == 0)
                 {

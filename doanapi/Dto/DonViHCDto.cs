@@ -1,27 +1,16 @@
-﻿namespace doanapi.Dto
+﻿using doanapi.Data;
+
+namespace doanapi.Dto
 {
-    public class DonViHCDto
+    public class DistrictDto
     {
-        public int Id { get; set; }
-        public int? ProvinceId { get; set; }
         public int? DistrictId { get; set; }
+        public string DistrictName { get; set; }
+        public List<CommuneDto> Communes { get; set; }
+    }
+    public class CommuneDto
+    {
         public int? CommuneId { get; set; }
-        public string ProvinceName { get; set; }
-        public string DistrictName { get; set; }
-        public string CommuneName { get; set; }
-        public string AdministrativeLevel { get; set; }
-        public bool? Deleted { get; set; }
-    }
-    public class HuyenDto
-    {
-        public string DistrictId { get; set; }
-        public string DistrictName { get; set; }
-    }
-    public class XaDto
-    {
-        public string DistrictId { get; set; }
-        public string CommuneId { get; set; }
-        public string DistrictName { get; set; }
         public string CommuneName { get; set; }
         public string AdministrativeLevel { get; set; }
     }

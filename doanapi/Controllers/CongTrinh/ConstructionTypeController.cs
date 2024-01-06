@@ -34,7 +34,7 @@ namespace doanapi.Controllers
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult<LoaiCongTrinh>> Save(ConstructionTypeDto dto)
+        public async Task<ActionResult<ConstructionType>> Save(ConstructionTypeDto dto)
         {
             var res = await _service.SaveAsync(dto);
             if (res == true)
@@ -49,7 +49,7 @@ namespace doanapi.Controllers
 
         [HttpGet]
         [Route("delete/{Id}")]
-        public async Task<ActionResult<LoaiCongTrinh>> Delete(int Id)
+        public async Task<ActionResult<ConstructionType>> Delete(int Id)
         {
             var res = await _service.DeleteAsync(Id);
             if (res == true)
