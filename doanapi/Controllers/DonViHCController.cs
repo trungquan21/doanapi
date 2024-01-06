@@ -39,6 +39,5 @@ namespace doanapi.Controllers
             return (await _service.GetAllCommuneByDistrictAsync(DistrictId));
         } 
 
-  
     }
 }
