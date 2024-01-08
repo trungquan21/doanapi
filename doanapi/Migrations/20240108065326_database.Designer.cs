@@ -12,8 +12,8 @@ using doanapi.Data;
 namespace doanapi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240103064611_construction")]
-    partial class construction
+    [Migration("20240108065326_database")]
+    partial class database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -265,7 +265,31 @@ namespace doanapi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("doanapi.Data.CongTrinh", b =>
+            modelBuilder.Entity("doanapi.Data.Commune", b =>
+                {
+                    b.Property<int>("CommuneId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommuneId"));
+
+                    b.Property<string>("AdministrativeLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CommuneName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CommuneId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("Commune");
+                });
+
+            modelBuilder.Entity("doanapi.Data.Construction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -276,14 +300,161 @@ namespace doanapi.Migrations
                     b.Property<string>("AccountCreated")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CommuneId")
+                        .HasColumnType("int");
+
                     b.Property<string>("ConstructionLocation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConstructionName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ConstructionTypeId")
+                    b.Property<int?>("ConstructionTypeId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EditAccount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RepairTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("X")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Y")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommuneId");
+
+                    b.HasIndex("ConstructionTypeId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("Construction");
+                });
+
+            modelBuilder.Entity("doanapi.Data.ConstructionDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AccountCreated")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("AmountRain")
+                        .HasColumnType("float");
+
+                    b.Property<double>("BasinArea")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Capacity")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ConstructionLevel")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Depth")
+                        .HasColumnType("float");
+
+                    b.Property<string>("DischargeLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EditAccount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("ExplorationArea")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ExplorationScale")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Flow")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("IdConstruction")
+                        .HasColumnType("int");
+
+                    b.Property<double>("IrrigatedArea")
+                        .HasColumnType("float");
+
+                    b.Property<double>("KF")
+                        .HasColumnType("float");
+
+                    b.Property<double>("KQ")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Method")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("NumberWell")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PumpNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Purposes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RepairTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StartDate")
+                        .HasColumnType("int");
+
+                    b.Property<double>("WaterLevel")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Watersource")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Wattage")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdConstruction")
+                        .IsUnique()
+                        .HasFilter("[IdConstruction] IS NOT NULL");
+
+                    b.ToTable("ConstructionDetails");
+                });
+
+            modelBuilder.Entity("doanapi.Data.ConstructionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AccountCreated")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConstructionTypeCode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreationTime")
                         .HasColumnType("datetime2");
@@ -294,20 +465,18 @@ namespace doanapi.Migrations
                     b.Property<string>("EditAccount")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("IdParent")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("RepairTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("X")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Y")
-                        .HasColumnType("float");
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConstructionTypeId");
-
-                    b.ToTable("Construction");
+                    b.ToTable("ConstructionType");
                 });
 
             modelBuilder.Entity("doanapi.Data.Dashboards", b =>
@@ -350,53 +519,20 @@ namespace doanapi.Migrations
                     b.ToTable("Dashboards");
                 });
 
-            modelBuilder.Entity("doanapi.Data.DonViHC", b =>
+            modelBuilder.Entity("doanapi.Data.District", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DistrictId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AccountCreated")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdministrativeLevel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CommuneId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CommuneName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("DistrictId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DistrictId"));
 
                     b.Property<string>("DistrictName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EditAccount")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("DistrictId");
 
-                    b.Property<int?>("ProvinceId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProvinceName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("RepairTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DonViHC");
+                    b.ToTable("District");
                 });
 
             modelBuilder.Entity("doanapi.Data.Functions", b =>
@@ -537,43 +673,6 @@ namespace doanapi.Migrations
                     b.ToTable("LicenseType");
                 });
 
-            modelBuilder.Entity("doanapi.Data.LoaiCongTrinh", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AccountCreated")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConstructionTypeCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("EditAccount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("IdParent")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("RepairTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TypeName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ConstructionType");
-                });
-
             modelBuilder.Entity("doanapi.Data.Organization", b =>
                 {
                     b.Property<int>("Id")
@@ -697,89 +796,6 @@ namespace doanapi.Migrations
                     b.ToTable("RoleDashboards");
                 });
 
-            modelBuilder.Entity("doanapi.Data.ThongSoCongTrinh", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AccountCreated")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("DischargeLocation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EditAccount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExploitedWater")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("FlowMax")
-                        .HasColumnType("float");
-
-                    b.Property<double>("FlowTT")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("IdConstruction")
-                        .HasColumnType("int");
-
-                    b.Property<double>("MNC")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MNCNTL")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MNDBT")
-                        .HasColumnType("float");
-
-                    b.Property<double>("MNDL")
-                        .HasColumnType("float");
-
-                    b.Property<int>("MachineCapacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MiningMethod")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MiningMode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("MiningPurposes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfExploitation")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PracticeTime")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("RepairTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StartDate")
-                        .HasColumnType("int");
-
-                    b.Property<string>("WastewaterReceiving")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdConstruction")
-                        .IsUnique()
-                        .HasFilter("[IdConstruction] IS NOT NULL");
-
-                    b.ToTable("ConstructionDetails");
-                });
-
             modelBuilder.Entity("doanapi.Data.UserDashboards", b =>
                 {
                     b.Property<int>("Id")
@@ -859,20 +875,50 @@ namespace doanapi.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("doanapi.Data.CongTrinh", b =>
+            modelBuilder.Entity("doanapi.Data.Commune", b =>
                 {
-                    b.HasOne("doanapi.Data.LoaiCongTrinh", "ConstructionType")
-                        .WithMany("CongTrinh")
-                        .HasForeignKey("ConstructionTypeId")
+                    b.HasOne("doanapi.Data.District", "District")
+                        .WithMany("Communes")
+                        .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("District");
+                });
+
+            modelBuilder.Entity("doanapi.Data.Construction", b =>
+                {
+                    b.HasOne("doanapi.Data.Commune", "Commune")
+                        .WithMany()
+                        .HasForeignKey("CommuneId");
+
+                    b.HasOne("doanapi.Data.ConstructionType", "ConstructionType")
+                        .WithMany("CongTrinh")
+                        .HasForeignKey("ConstructionTypeId");
+
+                    b.HasOne("doanapi.Data.District", "District")
+                        .WithMany()
+                        .HasForeignKey("DistrictId");
+
+                    b.Navigation("Commune");
+
                     b.Navigation("ConstructionType");
+
+                    b.Navigation("District");
+                });
+
+            modelBuilder.Entity("doanapi.Data.ConstructionDetail", b =>
+                {
+                    b.HasOne("doanapi.Data.Construction", "Construction")
+                        .WithOne("ConstructionDetails")
+                        .HasForeignKey("doanapi.Data.ConstructionDetail", "IdConstruction");
+
+                    b.Navigation("Construction");
                 });
 
             modelBuilder.Entity("doanapi.Data.License", b =>
                 {
-                    b.HasOne("doanapi.Data.CongTrinh", "Construction")
+                    b.HasOne("doanapi.Data.Construction", "Construction")
                         .WithMany("License")
                         .HasForeignKey("ConstructionId");
 
@@ -891,30 +937,26 @@ namespace doanapi.Migrations
                     b.Navigation("Organization");
                 });
 
-            modelBuilder.Entity("doanapi.Data.ThongSoCongTrinh", b =>
-                {
-                    b.HasOne("doanapi.Data.CongTrinh", "ConstructionDetail")
-                        .WithOne("ConstructionDetails")
-                        .HasForeignKey("doanapi.Data.ThongSoCongTrinh", "IdConstruction");
-
-                    b.Navigation("ConstructionDetail");
-                });
-
-            modelBuilder.Entity("doanapi.Data.CongTrinh", b =>
+            modelBuilder.Entity("doanapi.Data.Construction", b =>
                 {
                     b.Navigation("ConstructionDetails");
 
                     b.Navigation("License");
                 });
 
+            modelBuilder.Entity("doanapi.Data.ConstructionType", b =>
+                {
+                    b.Navigation("CongTrinh");
+                });
+
+            modelBuilder.Entity("doanapi.Data.District", b =>
+                {
+                    b.Navigation("Communes");
+                });
+
             modelBuilder.Entity("doanapi.Data.LicenseType", b =>
                 {
                     b.Navigation("License");
-                });
-
-            modelBuilder.Entity("doanapi.Data.LoaiCongTrinh", b =>
-                {
-                    b.Navigation("CongTrinh");
                 });
 
             modelBuilder.Entity("doanapi.Data.Organization", b =>

@@ -352,11 +352,26 @@ namespace doanapi.Migrations
                     b.Property<string>("AccountCreated")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("AmountRain")
+                        .HasColumnType("float");
+
+                    b.Property<double>("BasinArea")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Capacity")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ConstructionLevel")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CreationTime")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
+
+                    b.Property<double>("Depth")
+                        .HasColumnType("float");
 
                     b.Property<string>("DischargeLocation")
                         .HasColumnType("nvarchar(max)");
@@ -364,47 +379,41 @@ namespace doanapi.Migrations
                     b.Property<string>("EditAccount")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ExploitedWater")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("FlowMax")
+                    b.Property<double>("ExplorationArea")
                         .HasColumnType("float");
 
-                    b.Property<double>("FlowTT")
+                    b.Property<string>("ExplorationScale")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Flow")
                         .HasColumnType("float");
 
                     b.Property<int?>("IdConstruction")
                         .HasColumnType("int");
 
-                    b.Property<double>("MNC")
+                    b.Property<double>("IrrigatedArea")
                         .HasColumnType("float");
 
-                    b.Property<double>("MNCNTL")
+                    b.Property<double>("KF")
                         .HasColumnType("float");
 
-                    b.Property<double>("MNDBT")
+                    b.Property<double>("KQ")
                         .HasColumnType("float");
 
-                    b.Property<double>("MNDL")
-                        .HasColumnType("float");
-
-                    b.Property<int>("MachineCapacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MiningMethod")
+                    b.Property<string>("Method")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MiningMode")
+                    b.Property<string>("Mode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MiningPurposes")
+                    b.Property<double>("NumberWell")
+                        .HasColumnType("float");
+
+                    b.Property<int>("PumpNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Purposes")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumberOfExploitation")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PracticeTime")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("RepairTime")
                         .HasColumnType("datetime2");
@@ -412,8 +421,14 @@ namespace doanapi.Migrations
                     b.Property<int>("StartDate")
                         .HasColumnType("int");
 
-                    b.Property<string>("WastewaterReceiving")
+                    b.Property<double>("WaterLevel")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Watersource")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Wattage")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -879,7 +894,7 @@ namespace doanapi.Migrations
                         .HasForeignKey("ConstructionTypeId");
 
                     b.HasOne("doanapi.Data.District", "District")
-                        .WithMany("Construction")
+                        .WithMany()
                         .HasForeignKey("DistrictId");
 
                     b.Navigation("Commune");
@@ -934,8 +949,6 @@ namespace doanapi.Migrations
             modelBuilder.Entity("doanapi.Data.District", b =>
                 {
                     b.Navigation("Communes");
-
-                    b.Navigation("Construction");
                 });
 
             modelBuilder.Entity("doanapi.Data.LicenseType", b =>
