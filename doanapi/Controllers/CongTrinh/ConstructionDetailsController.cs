@@ -1,11 +1,12 @@
-﻿using doanapi.Dto;
+﻿using doanapi.Data;
+using doanapi.Dto;
 using doanapi.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace doanapi.Controllers
 {
-    [Route("api/ ConstructionDetails")]
+    [Route("api/ConstructionDetails")]
     [ApiController]
     //[Authorize]
     public class ConstructionDetailsController : ControllerBase
@@ -19,7 +20,7 @@ namespace doanapi.Controllers
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult> Save(ConstructionDetailsDto dto)
+        public async Task<ActionResult<ConstructionDetail>> Save(ConstructionDetailsDto dto)
         {
             var res = await _service.SaveAsync(dto);
             if (res)
