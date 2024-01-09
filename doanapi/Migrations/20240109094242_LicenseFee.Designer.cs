@@ -12,8 +12,8 @@ using doanapi.Data;
 namespace doanapi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240108065326_database")]
-    partial class Database
+    [Migration("20240109094242_LicenseFee")]
+    partial class LicenseFee
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -583,10 +583,10 @@ namespace doanapi.Migrations
                     b.Property<string>("EditAccount")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("EffectiveDate")
+                    b.Property<DateTime?>("EffectiveDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ExpirationDate")
+                    b.Property<DateTime?>("ExpirationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileDocument")
@@ -597,9 +597,6 @@ namespace doanapi.Migrations
 
                     b.Property<string>("FilePermission")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdCon")
-                        .HasColumnType("int");
 
                     b.Property<string>("LicenseName")
                         .HasColumnType("nvarchar(max)");
@@ -622,7 +619,7 @@ namespace doanapi.Migrations
                     b.Property<bool>("Revoked")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("SignDay")
+                    b.Property<DateTime?>("SignDay")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Signer")
@@ -637,6 +634,54 @@ namespace doanapi.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("License");
+                });
+
+            modelBuilder.Entity("doanapi.Data.LicenseFee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AccountCreated")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DecisionNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("EditAccount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePDF")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LicenseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LicensingAuthorities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RepairTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("SignDay")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LicenseId");
+
+                    b.ToTable("LicenseFee");
                 });
 
             modelBuilder.Entity("doanapi.Data.LicenseType", b =>
@@ -937,6 +982,17 @@ namespace doanapi.Migrations
                     b.Navigation("Organization");
                 });
 
+            modelBuilder.Entity("doanapi.Data.LicenseFee", b =>
+                {
+                    b.HasOne("doanapi.Data.License", "Licenses")
+                        .WithMany("LicenseFee")
+                        .HasForeignKey("LicenseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Licenses");
+                });
+
             modelBuilder.Entity("doanapi.Data.Construction", b =>
                 {
                     b.Navigation("ConstructionDetails");
@@ -952,6 +1008,11 @@ namespace doanapi.Migrations
             modelBuilder.Entity("doanapi.Data.District", b =>
                 {
                     b.Navigation("Communes");
+                });
+
+            modelBuilder.Entity("doanapi.Data.License", b =>
+                {
+                    b.Navigation("LicenseFee");
                 });
 
             modelBuilder.Entity("doanapi.Data.LicenseType", b =>

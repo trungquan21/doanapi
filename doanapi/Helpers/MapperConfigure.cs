@@ -63,7 +63,10 @@ namespace doanapi.Helpers
                 .ForMember(dest => dest.Organization, opt => opt.MapFrom(src => src.Organization))
                 .ForMember(dest => dest.LicenseType, opt => opt.MapFrom(src => src.LicenseType))
                 .ForMember(dest => dest.Construction, opt => opt.MapFrom(src => src.Construction))
-                //.ForMember(dest => dest.tiencq, opt => opt.MapFrom((src, dest) => dest.tiencq))
+                .ForMember(dest => dest.LicenseFee, opt => opt.MapFrom((src, dest) => dest.LicenseFee))
+                .ReverseMap();
+            CreateMap<LicenseFee, LicenseFeeDto>()
+                .ForMember(dest => dest.Licenses, opt => opt.MapFrom((src, dest) => dest.Licenses))
                 .ReverseMap();
             CreateMap<Organization, OrganizationDto>().ReverseMap();
 

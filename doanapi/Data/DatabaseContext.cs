@@ -38,6 +38,7 @@ namespace doanapi.Data
         public DbSet<License> License { get; set; }
         public DbSet<LicenseType> LicenseType { get; set; }
         public DbSet<Organization> Organization { get; set; }
+        public DbSet<LicenseFee> LicenseFee { get; set; }
 
         #endregion
     }

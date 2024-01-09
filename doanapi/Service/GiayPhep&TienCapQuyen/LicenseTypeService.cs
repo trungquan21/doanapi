@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace doanapi.Service.GiayPhep_TienCapQuyen
+namespace doanapi.Service
 {
     public class LicenseTypeService
     {

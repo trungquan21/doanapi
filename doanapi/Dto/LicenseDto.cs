@@ -3,7 +3,6 @@
     public class LicenseDto
     {
         public int Id { get; set; }
-        public int? IdCon { get; set; }
         public int? LicenseTypeId { get; set; }
         public int? OrganizationId { get; set; }
         public int? ConstructionId { get; set; }
@@ -20,6 +19,7 @@
         public string FilePermission { get; set; }
         public bool? Revoked { get; set; }
         public bool? Deleted { get; set; }
+        public List<LicenseFeeDto> LicenseFee { get; set; }
         public string Validityoflicense
         {
             get
@@ -51,7 +51,7 @@
         public LicenseTypeDto LicenseType { get; set; }
         public ConstructionDto Construction { get; set; }
         public OrganizationDto Organization { get; set; }
-        //public List<TCQ_ThongTinDto>? tiencq { get; set; }
+        public List<LicenseFeeDto> LicenseFees { get; set; }
 
     }
     public class CountFolowLicensingAuthoritiesDto
@@ -81,12 +81,12 @@
     public class LicenseStatisticsDto
     {
         public string[] Color { get; set; }
-        public int[] year { get; set; }
+        public int[] Year { get; set; }
         public List<ApexChartSeriesDto> Series { get; set; }
     }
     public class ApexChartSeriesDto
     {
         public string Name { get; set; }
-        public List<int> data { get; set; }
+        public List<int> Data { get; set; }
     }
 }

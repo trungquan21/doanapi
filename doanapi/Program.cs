@@ -28,6 +28,10 @@ services.AddScoped<ConstrucionService>();
 services.AddScoped<ConstructionDetailsService>();
 services.AddScoped<ConstructionTypeService>();
 services.AddScoped<DonViHCService>();
+//license
+services.AddScoped<LicenseService>();
+services.AddScoped<LicenseTypeService>();
+
 
 services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
 {
