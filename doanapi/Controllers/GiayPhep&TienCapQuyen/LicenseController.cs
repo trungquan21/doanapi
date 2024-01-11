@@ -19,9 +19,9 @@ namespace doanapi.Controllers.GiayPhep_TienCapQuyen
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<LicenseDto>> GetAllData(string LicenseNumber, int LicenseTypeId, int OrganizationId, string Validityoflicense)
+        public async Task<List<LicenseDto>> GetAllData(string LicenseNumber, int LicenseTypeId, string LicensingAuthorities, string Validityoflicense)
         {
-            return await _service.GetAllAsync( LicenseNumber,  LicenseTypeId,  OrganizationId,Validityoflicense);
+            return await _service.GetAllAsync( LicenseNumber,  LicenseTypeId, LicensingAuthorities, Validityoflicense);
         }
 
         [HttpGet]

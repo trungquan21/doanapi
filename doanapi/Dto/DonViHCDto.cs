@@ -6,7 +6,6 @@ namespace doanapi.Dto
     {
         public int? DistrictId { get; set; }
         public string DistrictName { get; set; }
-        public List<CommuneDto> Communes { get; set; }
     }
     public class CommuneDto
     {

@@ -31,6 +31,10 @@ services.AddScoped<DonViHCService>();
 //license
 services.AddScoped<LicenseService>();
 services.AddScoped<LicenseTypeService>();
+//licenseFee
+services.AddScoped<LicenseFeeService>();
+
+
 
 
 services.AddIdentity<AspNetUsers, AspNetRoles>(options =>

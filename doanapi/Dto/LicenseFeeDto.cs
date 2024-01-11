@@ -10,6 +10,5 @@
         public double Total { get; set; }
         public string FilePDF { get; set; }
         public bool Deleted { get; set; }
-        public List<LicenseFeeDto> Licenses { get; set; }
     }
 }

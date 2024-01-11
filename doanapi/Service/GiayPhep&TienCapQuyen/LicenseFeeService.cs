@@ -55,37 +55,19 @@ namespace doanapi.Service
 
             var listItems = _mapper.Map<List<LicenseFeeDto>>(items);
 
-            //foreach (var dto in listItems)
-            //{
-            //    // Assuming this code is within an async method
+            foreach (var dto in listItems)
+            {
+                // Assuming this code is within an async method
 
-            //    var gpList = await _context.License!
-            //        .Where(x => gpIds.Contains(x.Id) && x.DaXoa == false)
-            //        .ToListAsync();
+                //var gpList = await _context.License!
+                //    .Where(x => x.Id && x.Deleted == false)
+                //    .ToListAsync();
 
-            //    dto.Licenses = _mapper.Map<List<LicenseFeeDto>>(gpList);
+                //dto.Licenses = _mapper.Map<List<LicenseFeeDto>>(gpList);
 
-            //    if (dto.giayphep != null)
-            //    {
-            //        foreach (var gp in dto.giayphep)
-            //        {
-            //            gp.gp_tcq = null;
-            //        }
-            //        var ctIds = dto.giayphep.Select(x => x.IdCT).ToList();
-            //        var cts = await _context.CT_ThongTin!.Where(ct => ctIds.Contains(ct.Id)).ToListAsync();
-            //        dto.congtrinh = _mapper.Map<List<CT_ThongTinDto>>(cts);
-            //        if (dto.congtrinh != null)
-            //        {
-            //            foreach (var ct in dto.congtrinh)
-            //            {
-            //                ct.giayphep = null;
-            //            }
-            //        }
-            //    }
+                //dto.gp_tcq = null;
 
-            //    dto.gp_tcq = null;
-
-            //}
+            }
 
             return listItems;
         }

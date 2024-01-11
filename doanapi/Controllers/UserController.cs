@@ -6,7 +6,7 @@ using doanapi.Service;
 
 namespace new_wr_api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/User")]
     [ApiController]
     //[Authorize]
     public class UserController : ControllerBase

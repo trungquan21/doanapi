@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("doanapi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57e299af0d93442ed2c995708f79be98a573d7c0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dbe6f270c59dd908ddfdc39dcc66f06146273c8b")]
 [assembly: System.Reflection.AssemblyProductAttribute("doanapi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("doanapi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

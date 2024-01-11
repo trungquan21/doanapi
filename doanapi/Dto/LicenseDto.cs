@@ -1,4 +1,6 @@
-﻿namespace doanapi.Dto
+﻿using Microsoft.AspNetCore.Routing.Matching;
+
+namespace doanapi.Dto
 {
     public class LicenseDto
     {
@@ -19,12 +21,12 @@
         public string FilePermission { get; set; }
         public bool? Revoked { get; set; }
         public bool? Deleted { get; set; }
-        public List<LicenseFeeDto> LicenseFee { get; set; }
+        public ICollection<LicenseFeeDto> LicenseFee { get; set; } 
         public string Validityoflicense
         {
             get
             {
-                if (Revoked == true)
+                if (Revoked == true) 
                 {
                     return "da-bi-thu-hoi";
                 }
@@ -49,10 +51,7 @@
         }
         //public List<GP_ThongTinDto>? giayphep_cu { get; set; }
         public LicenseTypeDto LicenseType { get; set; }
-        public ConstructionDto Construction { get; set; }
         public OrganizationDto Organization { get; set; }
-        public List<LicenseFeeDto> LicenseFees { get; set; }
-
     }
     public class CountFolowLicensingAuthoritiesDto
     {

@@ -32,6 +32,7 @@ namespace doanapi.Service
                 .Include(ct => ct.ConstructionDetails)
                  .Include(ct => ct.Commune)
                  .Include(ct => ct.District)
+                 .Include(ct => ct.License)
                 .OrderBy(x => x.ConstructionTypeId)
                 .AsQueryable();
 
@@ -70,19 +71,6 @@ namespace doanapi.Service
                 }
 
                 dto.Licenses = _mapper.Map<List<LicenseDto>>(dto.Licenses!.Where(x => x.Deleted == false));
-
-                //foreach (var dtoGP in dto.giayphep)
-                //{
-                //    var tcqIds = dtoGP.gp_tcq!.Select(x => x.IdTCQ).ToList();
-
-                //    var tcqThongTinList = await _context.TCQ_ThongTin!
-                //        .Where(x => tcqIds.Contains(x.Id) && x.DaXoa == false)
-                //        .ToListAsync();
-
-                //    dtoGP.tiencq = _mapper.Map<List<TCQ_ThongTinDto>>(tcqThongTinList);
-
-                //    dtoGP.gp_tcq = null;
-                //}
             }
 
             // Return the list of DTOs

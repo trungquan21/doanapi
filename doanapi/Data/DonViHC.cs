@@ -9,7 +9,6 @@ namespace doanapi.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
-        public virtual ICollection<Commune> Communes { get; set; }
     }
 
         public class Commune

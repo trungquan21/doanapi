@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using doanapi.Models;
+﻿using doanapi.Models;
 using doanapi.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace new_wr_api.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/Role")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class RoleController : ControllerBase
     {
         private readonly RoleService _service;
@@ -26,7 +27,7 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("{roleId}")]
-        public async Task<RoleModel> GetRoleById(string roleId)
+        public async Task<RoleModel?> GetRoleById(string roleId)
         {
             return await _service.GetRoleByIdAsync(roleId);
         }

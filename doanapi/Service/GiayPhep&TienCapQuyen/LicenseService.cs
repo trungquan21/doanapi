@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using doanapi.Data;
 using doanapi.Dto;
 using Microsoft.AspNetCore.Identity;
@@ -21,14 +22,13 @@ namespace doanapi.Service
             _httpContext = httpContext;
             _userManager = userManager;
         }
-        public async Task<List<LicenseDto>> GetAllAsync(string LicenseNumber, int LicenseTypeId, int OrganizationId,string Validityoflicense )
+        public async Task<List<LicenseDto>> GetAllAsync(string LicenseNumber, int LicenseTypeId, string LicensingAuthorities, string Validityoflicense )
         {
             var query = _context.License!
                 .Where(gp => gp.Deleted == false)
                 .Include(gp => gp.LicenseType)
-                .Include(gp => gp.Organization)
                 .Include(gp => gp.Construction)
-                //.Include(gp => gp.GP_TCQ)
+                .Include(gp => gp.LicenseFee)
                 .OrderBy(x => x.SignDay)
                 .AsQueryable();
 
@@ -45,20 +45,10 @@ namespace doanapi.Service
                 query = query.Where(x => x.LicenseNumber!.Contains(LicenseNumber));
             }
 
-            //if (!string.IsNullOrEmpty(OrganizationId))
-            //{
-            //    query = query.Where(x => x.Organization!.Contains(OrganizationName));
-            //}
-
-            if (OrganizationId > 0)
+            if (!string.IsNullOrEmpty(LicensingAuthorities))
             {
-                query = query.Where(x => x.OrganizationId == OrganizationId);
+                query = query.Where(x => x.LicensingAuthorities!.Contains(LicensingAuthorities));
             }
-
-            //if (filterDto.cong_trinh > 0)
-            //{
-            //    query = query.Where(x => x.IdCT == filterDto.cong_trinh);
-            //}
 
             if (LicenseTypeId > 0)
             {
@@ -96,30 +86,9 @@ namespace doanapi.Service
                 }
             }
 
-            var giayphep = await query.ToListAsync();
+            var giayphep = await query.ProjectTo<LicenseDto>(_mapper.ConfigurationProvider).ToListAsync();
 
-            var giayPhepDtos = _mapper.Map<List<LicenseDto>>(giayphep);
-
-            foreach (var dto in giayPhepDtos)
-            {
-                if (dto.Construction != null)
-                {
-                    dto.Construction!.Licenses = null;
-                }
-
-                // Assuming this code is within an async method
-                //var tcqIds = dto.gp_tcq!.Select(x => x.IdTCQ).ToList();
-
-                //var tcqThongTinList = await _context.TCQ_ThongTin!
-                //    .Where(x => tcqIds.Contains(x.Id) && x.DaXoa == false)
-                //    .ToListAsync();
-
-                //dto.tiencq = _mapper.Map<List<TCQ_ThongTinDto>>(tcqThongTinList);
-
-                //dto.gp_tcq = null;
-            }
-
-            return giayPhepDtos;
+            return giayphep;
         }
 
         //method count
