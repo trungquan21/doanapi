@@ -76,6 +76,12 @@ namespace doanapi.Service
             // Return the list of DTOs
             return congTrinhDtos;
         }
+        // Method to check if a construction name is unique
+        public async Task<bool> IsConstructionNameUniqueAsync(string constructionName)
+        {
+            return await _context.Construction!
+                .AnyAsync(ct => ct.Deleted == false && ct.ConstructionName == constructionName);
+        }
 
         // Method to retrieve a single Construction entity by Id
         public async Task<ConstructionDto> GetByIdAsync(int Id)

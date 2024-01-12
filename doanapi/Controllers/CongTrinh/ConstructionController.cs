@@ -27,6 +27,23 @@ namespace doanapi.Controllers
         }
 
         [HttpGet]
+        [Route("checkDuplicateName")]
+        public async Task<IActionResult> CheckDuplicateName([FromQuery] string constructionName)
+        {
+            try
+            {
+                var isUnique = await _service.IsConstructionNameUniqueAsync(constructionName);
+                return Ok(new { isUnique });
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it appropriately
+                return StatusCode(500, new { error = "Internal Server Error" });
+            }
+        }
+
+
+        [HttpGet]
         [Route("{Id}")]
         public async Task<ConstructionDto> GetOneData(int Id)
         {
