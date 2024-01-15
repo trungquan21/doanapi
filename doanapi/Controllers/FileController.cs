@@ -5,7 +5,7 @@ using doanapi.Models.Files;
 namespace new_wr_api.Controllers
 {
     [ApiController]
-    [Route("file")]
+    [Route("api/file")]
 
     public class FileController : ControllerBase
     {
