@@ -5,6 +5,7 @@ namespace doanapi.Dto
     public class LicenseDto
     {
         public int Id { get; set; }
+        public int? IdOld { get; set; }
         public int? LicenseTypeId { get; set; }
         public int? OrganizationId { get; set; }
         public int? ConstructionId { get; set; }
@@ -49,7 +50,7 @@ namespace doanapi.Dto
                 return "con-hieu-luc";
             }
         }
-        //public List<GP_ThongTinDto>? giayphep_cu { get; set; }
+        public List<LicenseDto> LicenseOld { get; set; }
         public LicenseTypeDto LicenseType { get; set; }
         public OrganizationDto Organization { get; set; }
     }

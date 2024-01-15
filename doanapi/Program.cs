@@ -33,9 +33,8 @@ services.AddScoped<LicenseService>();
 services.AddScoped<LicenseTypeService>();
 //licenseFee
 services.AddScoped<LicenseFeeService>();
-
-
-
+//tccn
+services.AddScoped<ToChucCaNhanService>();
 
 services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
 {

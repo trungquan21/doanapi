@@ -89,6 +89,31 @@ namespace doanapi.Service
             var giayphep = await query.ProjectTo<LicenseDto>(_mapper.ConfigurationProvider).ToListAsync();
 
             return giayphep;
+            //var giayphep = await query.ToListAsync();
+
+            //var giayPhepDtos = _mapper.Map<List<LicenseDto>>(giayphep);
+
+            //foreach (var dto in giayPhepDtos)
+            //{
+            //    var gp_cu = await _context.License!.Where(gp => gp.Id == dto.IdOld && gp.Deleted == false).ToListAsync();
+            //    if (gp_cu != null)
+            //    {
+            //        dto.LicenseOld = _mapper.Map<List<LicenseDto>>(gp_cu);
+            //    }
+
+            //    // Assuming this code is within an async method
+            //    var tcqIds = dto.gp_tcq!.Select(x => x.IdTCQ).ToList();
+
+            //    var tcqThongTinList = await _context.TCQ_ThongTin!
+            //        .Where(x => tcqIds.Contains(x.Id) && x.DaXoa == false)
+            //        .ToListAsync();
+
+            //    dto.tiencq = _mapper.Map<List<TCQ_ThongTinDto>>(tcqThongTinList);
+
+            //    dto.gp_tcq = null;
+            //}
+
+            //return giayPhepDtos;
         }
 
         //method count

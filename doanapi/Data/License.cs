@@ -11,7 +11,7 @@ namespace doanapi.Data
         public int? LicenseTypeId { get; set; }
         public int? OrganizationId { get; set; }
         public int? ConstructionId { get; set; }
-
+        public int? IdOld { get; set; }
         public string LicenseName { get; set; }
         public string LicenseNumber { get; set; }
         public DateTime? SignDay { get; set; }
