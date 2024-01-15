@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using new_wr_api.Models.Files;
+using doanapi.Models.Files;
 
 namespace new_wr_api.Controllers
 {
