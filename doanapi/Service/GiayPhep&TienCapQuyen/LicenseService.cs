@@ -22,12 +22,13 @@ namespace doanapi.Service
             _httpContext = httpContext;
             _userManager = userManager;
         }
-        public async Task<List<LicenseDto>> GetAllAsync(string LicenseNumber, int LicenseTypeId, string LicensingAuthorities, string Validityoflicense )
+        public async Task<List<LicenseDto>> GetAllAsync(string LicenseNumber, int LicenseTypeId, int ConstructionType, string LicensingAuthorities, string Validityoflicense )
         {
             var query = _context.License!
                 .Where(gp => gp.Deleted == false)
                 .Include(gp => gp.LicenseType)
                 .Include(gp => gp.Construction)
+                .Include(gp => gp.Construction).ThenInclude(ct => ct!.ConstructionType)
                 .Include(gp => gp.LicenseFee)
                 .OrderBy(x => x.SignDay)
                 .AsQueryable();
@@ -54,8 +55,11 @@ namespace doanapi.Service
             {
                 query = query.Where(x => x.LicenseTypeId == LicenseTypeId);
             }
+            if (ConstructionType > 0)
+            {
+                query = query.Where(gp => ConstructionType == 1 || ConstructionType == 2 || ConstructionType == 3 ? gp.Construction!.ConstructionType!.IdParent == ConstructionType : gp.Construction!.ConstructionType!.Id == ConstructionType);
+            }
 
-      
             if (!string.IsNullOrEmpty(Validityoflicense))
             {
                 switch (Validityoflicense.ToLower())

@@ -3,6 +3,7 @@ using doanapi.Data;
 using doanapi.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace doanapi.Service
 {
@@ -23,13 +24,25 @@ namespace doanapi.Service
         }
 
         // Method to get all TCQ_ThongTin entities
-        public async Task<List<LicenseFeeDto>> GetAllAsync()
+        public async Task<List<LicenseFeeDto>> GetAllAsync(string DecisionNumber, string LicensingAuthorities)
         {
-            var items = await _context!.LicenseFee!
-                .Where(u => u.Deleted == false)
-                .ToListAsync();
+            var query = _context.LicenseFee!
+                .Where(gp => gp.Deleted == false)
+                .AsQueryable();
 
-            var listItems = _mapper.Map<List<LicenseFeeDto>>(items);
+            // Apply filters based on input parameters
+            var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
+            if (!string.IsNullOrEmpty(DecisionNumber))
+            {
+                query = query.Where(x => x.DecisionNumber!.Contains(DecisionNumber));
+            }
+
+            if (!string.IsNullOrEmpty(LicensingAuthorities))
+            {
+                query = query.Where(x => x.LicensingAuthorities!.Contains(LicensingAuthorities));
+            }
+
+            var listItems = _mapper.Map<List<LicenseFeeDto>>(query);
 
             return listItems;
         }
