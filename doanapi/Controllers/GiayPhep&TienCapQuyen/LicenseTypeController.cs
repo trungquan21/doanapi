@@ -20,7 +20,7 @@ namespace doanapi.Controllers.GiayPhep_TienCapQuyen
         }
 
         [HttpGet]
-        [Route("danh-sach")]
+        [Route("list")]
         public async Task<List<LicenseTypeDto>> GetAllGP_Loai()
         {
             return (await _service.GetAllAsync());
@@ -34,7 +34,7 @@ namespace doanapi.Controllers.GiayPhep_TienCapQuyen
         //}
 
         [HttpPost]
-        [Route("luu")]
+        [Route("save")]
         public async Task<ActionResult<LicenseType>> SaveGP_Loai(LicenseTypeDto dto)
         {
             var res = await _service.SaveAsync(dto);
@@ -49,7 +49,7 @@ namespace doanapi.Controllers.GiayPhep_TienCapQuyen
         }
 
         [HttpGet]
-        [Route("xoa/{Id}")]
+        [Route("delete/{Id}")]
         public async Task<ActionResult<LicenseType>> DeleteLicenseType(int Id)
         {
             var res = await _service.DeleteAsync(Id);
