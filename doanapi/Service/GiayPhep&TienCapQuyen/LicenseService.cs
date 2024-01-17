@@ -24,6 +24,7 @@ namespace doanapi.Service
         }
         public async Task<List<LicenseDto>> GetAllAsync(string LicenseNumber, int LicenseTypeId, int ConstructionType, string LicensingAuthorities, string Validityoflicense )
         {
+            _context.Database.SetCommandTimeout(120);
             var query = _context.License!
                 .Where(gp => gp.Deleted == false)
                 .Include(gp => gp.LicenseType)
