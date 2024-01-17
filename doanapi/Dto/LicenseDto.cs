@@ -53,6 +53,8 @@ namespace doanapi.Dto
         public List<LicenseDto> LicenseOld { get; set; }
         public LicenseTypeDto LicenseType { get; set; }
         public OrganizationDto Organization { get; set; }
+        public ConstructionDto Construction { get; set; }
+
     }
     public class CountFolowLicensingAuthoritiesDto
     {

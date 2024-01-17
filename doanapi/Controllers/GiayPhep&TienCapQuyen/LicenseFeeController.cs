@@ -1,6 +1,7 @@
 ﻿using doanapi.Data;
 using doanapi.Dto;
 using doanapi.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace doanapi.Controllers.GiayPhep_TienCapQuyen
 {
     [Route("api/LicenseFee")]
     [ApiController]
+    [Authorize]
     public class LicenseFeeController : ControllerBase
     {
         private readonly LicenseFeeService _service;

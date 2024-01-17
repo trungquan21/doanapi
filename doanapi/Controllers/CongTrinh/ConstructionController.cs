@@ -8,7 +8,7 @@ namespace doanapi.Controllers
 {
     [Route("api/Construction")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ConstructionController : ControllerBase
     {
         private readonly ConstrucionService _service;
