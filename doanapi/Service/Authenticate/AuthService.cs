@@ -82,68 +82,7 @@ namespace doanapi.Service
             {
 
                 claims.Add(new Claim(ClaimTypes.Role, role));
-
-                // Lấy danh sách quyền thuộc vai trò
-                var rolePermissions = await _context.Permissions!.Where(p => p.RoleName == role).ToListAsync();
-
-                // Thêm quyền vào danh sách claims
-                foreach (var permission in rolePermissions)
-                {
-                    // Lấy thông tin dashSrc từ SQL
-                    var dashSrc = await _context.Dashboards!.Where(d => d.Id == permission.DashboardId).Select(d => d.Path).FirstOrDefaultAsync();
-
-                    // Tạo một quyền dưới dạng đối tượng JSON
-                    var permissionObject = new
-                    {
-                        funcCode = permission.FunctionCode,
-                        dashSrc = dashSrc!
-                    };
-
-                    var permissionJson = JsonConvert.SerializeObject(permissionObject);
-
-                    // Kiểm tra xem quyền đã được thêm vào danh sách chưa
-                    if (!addedPermissions.Contains(permissionJson))
-                    {
-                        // Thêm quyền vào danh sách claims
-                        var permissionClaim = new Claim("Permission", permissionJson);
-                        claims.Add(permissionClaim);
-
-                        // Đánh dấu quyền đã được thêm vào danh sách
-                        addedPermissions.Add(permissionJson);
-                    }
-                }
             }
-
-            // Lấy danh sách quyền theo tên người dùng
-            var userPermissions = await _context.Permissions!.Where(p => p.UserName == user.UserName).ToListAsync();
-
-            // Thêm quyền vào danh sách claims
-            foreach (var permission in userPermissions)
-            {
-                // Lấy thông tin dashSrc từ SQL
-                var dashSrc = await _context.Dashboards!.Where(d => d.Id == permission.DashboardId).Select(d => d.Path).FirstOrDefaultAsync();
-
-                // Tạo một quyền dưới dạng đối tượng JSON
-                var permissionObject = new
-                {
-                    funcCode = permission.FunctionCode,
-                    dashSrc = dashSrc!
-                };
-
-                var permissionJson = JsonConvert.SerializeObject(permissionObject);
-
-                // Kiểm tra xem quyền đã được thêm vào danh sách chưa
-                if (!addedPermissions.Contains(permissionJson))
-                {
-                    // Thêm quyền vào danh sách claims
-                    var permissionClaim = new Claim("Permission", permissionJson);
-                    claims.Add(permissionClaim);
-
-                    // Đánh dấu quyền đã được thêm vào danh sách
-                    addedPermissions.Add(permissionJson);
-                }
-            }
-
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? ""));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

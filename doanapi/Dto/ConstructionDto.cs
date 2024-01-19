@@ -14,6 +14,8 @@ namespace doanapi.Dto
         public double? X { get; set; }
         public double? Y { get; set; }
         public bool? Deleted { get; set; }
+        //public ASP ConstructionType { get; set; }
+
         public ConstructionTypeDto ConstructionType { get; set; }
         public ConstructionDetailsDto ConstructionDetails { get; set; }
         public DistrictDto Districts { get; set; }

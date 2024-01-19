@@ -27,7 +27,7 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("{roleId}")]
-        public async Task<RoleModel?> GetRoleById(string roleId)
+        public async Task<RoleModel> GetRoleById(string roleId)
         {
             return await _service.GetRoleByIdAsync(roleId);
         }

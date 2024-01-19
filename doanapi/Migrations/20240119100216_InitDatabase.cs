@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace doanapi.Migrations
 {
     /// <inheritdoc />
-    public partial class Database : Migration
+    public partial class InitDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -85,27 +85,6 @@ namespace doanapi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Dashboards",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PermitAccess = table.Column<bool>(type: "bit", nullable: true),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedUser = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dashboards", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "District",
                 columns: table => new
                 {
@@ -116,21 +95,6 @@ namespace doanapi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_District", x => x.DistrictId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Functions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PermitCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PermitName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Functions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -150,87 +114,6 @@ namespace doanapi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_LicenseType", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Organization",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrganizationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TaxCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SDT = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Fax = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Manager = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AuthorizedPerson = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LegalRepresentation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Account = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Deleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Organization", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permissions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RoleId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DashboardId = table.Column<int>(type: "int", nullable: false),
-                    FunctionId = table.Column<int>(type: "int", nullable: false),
-                    FunctionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FunctionCode = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RoleDashboards",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RoleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DashboardId = table.Column<int>(type: "int", nullable: false),
-                    FileControl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PermitAccess = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoleDashboards", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserDashboards",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DashboardId = table.Column<int>(type: "int", nullable: false),
-                    FileControl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PermitAccess = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserDashboards", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -366,6 +249,7 @@ namespace doanapi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ConstructionTypeId = table.Column<int>(type: "int", nullable: true),
                     DistrictId = table.Column<int>(type: "int", nullable: true),
                     CommuneId = table.Column<int>(type: "int", nullable: true),
@@ -382,6 +266,11 @@ namespace doanapi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Construction", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Construction_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Construction_Commune_CommuneId",
                         column: x => x.CommuneId,
@@ -449,17 +338,17 @@ namespace doanapi.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdCon = table.Column<int>(type: "int", nullable: false),
                     LicenseTypeId = table.Column<int>(type: "int", nullable: true),
                     OrganizationId = table.Column<int>(type: "int", nullable: true),
                     ConstructionId = table.Column<int>(type: "int", nullable: true),
+                    IdOld = table.Column<int>(type: "int", nullable: true),
                     LicenseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LicenseNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SignDay = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EffectiveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SignDay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EffectiveDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ExpirationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Duration = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Signer = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LicenseHolder = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LicensingAuthorities = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FileLicense = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FileDocument = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -484,11 +373,35 @@ namespace doanapi.Migrations
                         column: x => x.LicenseTypeId,
                         principalTable: "LicenseType",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LicenseFee",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LicenseId = table.Column<int>(type: "int", nullable: false),
+                    DecisionNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SignDay = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LicensingAuthorities = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Total = table.Column<double>(type: "float", nullable: false),
+                    FilePDF = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    AccountCreated = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EditAccount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Deleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LicenseFee", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_License_Organization_OrganizationId",
-                        column: x => x.OrganizationId,
-                        principalTable: "Organization",
-                        principalColumn: "Id");
+                        name: "FK_LicenseFee_License_LicenseId",
+                        column: x => x.LicenseId,
+                        principalTable: "License",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -551,6 +464,13 @@ namespace doanapi.Migrations
                 column: "DistrictId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Construction_UserId",
+                table: "Construction",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ConstructionDetails_IdConstruction",
                 table: "ConstructionDetails",
                 column: "IdConstruction",
@@ -568,9 +488,9 @@ namespace doanapi.Migrations
                 column: "LicenseTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_License_OrganizationId",
-                table: "License",
-                column: "OrganizationId");
+                name: "IX_LicenseFee_LicenseId",
+                table: "LicenseFee",
+                column: "LicenseId");
         }
 
         /// <inheritdoc />
@@ -595,28 +515,13 @@ namespace doanapi.Migrations
                 name: "ConstructionDetails");
 
             migrationBuilder.DropTable(
-                name: "Dashboards");
-
-            migrationBuilder.DropTable(
-                name: "Functions");
-
-            migrationBuilder.DropTable(
-                name: "License");
-
-            migrationBuilder.DropTable(
-                name: "Permissions");
-
-            migrationBuilder.DropTable(
-                name: "RoleDashboards");
-
-            migrationBuilder.DropTable(
-                name: "UserDashboards");
+                name: "LicenseFee");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "License");
 
             migrationBuilder.DropTable(
                 name: "Construction");
@@ -625,7 +530,7 @@ namespace doanapi.Migrations
                 name: "LicenseType");
 
             migrationBuilder.DropTable(
-                name: "Organization");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Commune");

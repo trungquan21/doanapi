@@ -11,5 +11,6 @@ namespace doanapi.Data
         public DateTime ModifiedTime { get; set; }
         public string ModifiedUser { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public virtual Construction Construction { get; set; }
     }
 }

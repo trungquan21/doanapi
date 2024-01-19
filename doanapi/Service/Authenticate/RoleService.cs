@@ -27,32 +27,6 @@ namespace doanapi.Service
                 .ToListAsync();
             var listItems = _mapper.Map<List<RoleModel>>(items);
 
-            foreach (var item in listItems)
-            {
-                var dashIds = _context!.RoleDashboards!.Where(x => x.RoleId == item.Id).Select(x => x.DashboardId).ToList();
-                var dashboards = await _context!.Dashboards!.Where(x => dashIds.Contains(x.Id)).ToListAsync();
-                item.Dashboards = _mapper.Map<List<DashboardModel>>(dashboards);
-                foreach (var dash in item.Dashboards)
-                {
-                    var functions = await _context!.Functions!.Where(x => x.Id > 0).ToListAsync();
-                    dash.Functions = _mapper.Map<List<FunctionModel>>(functions);
-                    foreach (var function in dash.Functions)
-                    {
-                        var existingPermission = await _context.Permissions!.
-                            FirstOrDefaultAsync(d => d.FunctionId == function.Id && d.DashboardId == dash.Id && d.RoleId == item.Id);
-
-                        if (existingPermission != null)
-                        {
-                            function.Status = true;
-                        }
-                        else
-                        {
-                            function.Status = false;
-                        }
-                    }
-                }
-            }
-
             return listItems;
         }
 
@@ -60,29 +34,6 @@ namespace doanapi.Service
         {
             var item = await _roleManager.FindByIdAsync(roleId);
             var role = _mapper.Map<RoleModel>(item);
-            var dashIds = _context!.RoleDashboards!.Where(x => x.RoleId == roleId).Select(x => x.DashboardId).ToList();
-            var dashboards = await _context!.Dashboards!.Where(x => dashIds.Contains(x.Id)).ToListAsync();
-            role.Dashboards = _mapper.Map<List<DashboardModel>>(dashboards);
-            foreach (var dash in role.Dashboards)
-            {
-                var functions = await _context!.Functions!.Where(x => x.Id > 0).ToListAsync();
-                dash.Functions = _mapper.Map<List<FunctionModel>>(functions);
-                foreach (var function in dash.Functions)
-                {
-                    var existingPermission = await _context.Permissions!.
-                        FirstOrDefaultAsync(d => d.FunctionId == function.Id && d.DashboardId == dash.Id && d.RoleId == role.Id);
-
-                    if (existingPermission != null)
-                    {
-                        function.Status = true;
-                    }
-                    else
-                    {
-                        function.Status = false;
-                    }
-                }
-            }
-
             return role;
         }
 

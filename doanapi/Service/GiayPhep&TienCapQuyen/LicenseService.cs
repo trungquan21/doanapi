@@ -202,7 +202,6 @@ namespace doanapi.Service
             var query = _context.License!
                 .Where(gp => gp.Id == Id && gp.Deleted == false)
                 .Include(gp => gp.LicenseType)
-                .Include(gp => gp.Organization)
                 //.Include(gp => gp.GP_TCQ)
                 .OrderBy(x => x.SignDay)
                 .AsQueryable();

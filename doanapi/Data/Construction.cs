@@ -10,6 +10,7 @@ namespace doanapi.Data
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public string UserId { get; set; }
         public int? ConstructionTypeId { get; set; }
         public int? DistrictId { get; set; }
         public int? CommuneId { get; set; }
@@ -22,6 +23,9 @@ namespace doanapi.Data
         public DateTime? RepairTime { get; set; } 
         public string EditAccount { get; set; }
         public bool? Deleted { get; set; }
+        //tao khoa ngoai vơi bang asp user
+        [ForeignKey(nameof(UserId))]
+        public virtual AspNetUsers Users { get; set; }
 
         //tao khoa ngoai voi loai cong trinh
         [ForeignKey(nameof(ConstructionTypeId))]
@@ -33,7 +37,7 @@ namespace doanapi.Data
         [ForeignKey(nameof(CommuneId))]
         public virtual Commune Commune { get; set; }
 
-        public virtual ICollection<License> License { get; set; }
+        public virtual ICollection<License> License { get; set; }//icollection là lấy nhiều
         public virtual ConstructionDetail ConstructionDetails { get; set; }
 
     }

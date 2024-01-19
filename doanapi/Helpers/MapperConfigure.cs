@@ -17,35 +17,11 @@ namespace doanapi.Helpers
             CreateMap<AspNetUsers, UserModel>().ReverseMap();
 
             //Users Info
-            CreateMap<AspNetUsers, UserInfoModel>().ForMember(dest => dest.Dashboards, opt =>
-                {
-                    opt.MapFrom((src, dest) => dest.Dashboards);
-                }).ReverseMap();
+            CreateMap<AspNetUsers, UserInfoModel>().ReverseMap();
 
             //Roles
-            CreateMap<AspNetRoles, RoleModel>()
-                .ForMember(dest => dest.Dashboards, opt =>
-                {
-                    opt.MapFrom((src, dest) => dest.Dashboards);
-                }).ReverseMap();
-
-            //Dashboards
-            CreateMap<Dashboards, DashboardModel>()
-                .ForMember(dest => dest.Functions, opt =>
-                {
-                    opt.MapFrom((src, dest) => dest.Functions);
-                }).ReverseMap();
-
-            //Permissions
-            CreateMap<Permissions, PermissionModel>().ReverseMap();
-
-            //Dashboard for Roles and Users
-            CreateMap<UserDashboards, UserDashboardModel>().ReverseMap();
-            CreateMap<RoleDashboards, RoleDashboardModel>().ReverseMap();
-
-            //functions
-            CreateMap<Functions, FunctionModel>().ReverseMap();
-
+            CreateMap<AspNetRoles, RoleModel>().ReverseMap();
+      
             //-------------Other mapper--------------------
             CreateMap<ConstructionType, ConstructionTypeDto>().ReverseMap();
             CreateMap<ConstructionDetail, ConstructionDetailsDto>().ReverseMap();
@@ -59,12 +35,10 @@ namespace doanapi.Helpers
             CreateMap<Commune, CommuneDto>().ReverseMap();
             CreateMap<LicenseType, LicenseTypeDto>().ReverseMap();
             CreateMap<License, LicenseDto>()
-                .ForMember(dest => dest.Organization, opt => opt.MapFrom(src => src.Organization))
                 .ForMember(dest => dest.LicenseType, opt => opt.MapFrom(src => src.LicenseType))
                 .ForMember(dest => dest.Construction, opt => opt.MapFrom(src => src.Construction))
                 .ReverseMap();
             CreateMap<LicenseFee, LicenseFeeDto>().ReverseMap();
-            CreateMap<Organization, OrganizationDto>().ReverseMap();
 
         }
     }

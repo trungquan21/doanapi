@@ -90,38 +90,25 @@ namespace doanapi.Service
                 .Where(ct => ct.Deleted == false && ct.Id == Id)
                 .Include(ct => ct.ConstructionTypeId)
                 .Include(ct => ct.ConstructionDetails)
+                .Include(ct => ct.Users)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 //.Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
                 .OrderBy(x => x.ConstructionTypeId)
                 .AsQueryable();
+            var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
+            if (currentUser != null)
+            {
+                if(await _userManager.IsInRoleAsync(currentUser, "congtrinh"))
+                {
+                    query = query.Where(ct => ct.Users.UserName.ToLower() == currentUser.UserName.ToLower());
+                }
+            }
 
             var congtrinh = query.FirstOrDefault();
 
             // Map the result to a DTO
             var congTrinhDto = _mapper.Map<ConstructionDto>(query);
 
-            // Further processing on the DTO
-           
-            //if (congTrinhDto.CommuneId != 0)
-            //{
-            //    congTrinhDto.DonViHanhChinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
-            //        .FirstOrDefaultAsync(dv => dv.CommuneId == congTrinhDto.CommuneId));
-            //}
-
-            //congTrinhDto.giayphep = _mapper.Map<List<GP_ThongTinDto>>(congTrinhDto.giayphep!.Where(x => x.DaXoa == false));
-
-            //foreach (var dtoGP in congTrinhDto.giayphep)
-            //{
-            //    var tcqIds = dtoGP.gp_tcq!.Select(x => x.IdTCQ).ToList();
-
-            //    var tcqThongTinList = await _context.TCQ_ThongTin!
-            //        .Where(x => tcqIds.Contains(x.Id) && x.DaXoa == false)
-            //        .ToListAsync();
-
-            //    dtoGP.tiencq = _mapper.Map<List<TCQ_ThongTinDto>>(tcqThongTinList);
-
-            //    dtoGP.gp_tcq = null;
-            //}
 
             // Return the DTO
             return congTrinhDto;

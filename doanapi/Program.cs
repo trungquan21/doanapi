@@ -15,14 +15,9 @@ var services = builder.Services;
 services.AddDbContext<DatabaseContext>();
 
 services.AddAutoMapper(typeof(Program));
-
 services.AddScoped<IAuthService, AuthService>();
 services.AddScoped<UserService>();
 services.AddScoped<RoleService>();
-services.AddScoped<DashboardService>();
-services.AddScoped<RoleDashboardService>();
-services.AddScoped<UserDashboardService>();
-services.AddScoped<PermissionService>();
 //other
 services.AddScoped<ConstrucionService>();
 services.AddScoped<ConstructionDetailsService>();
@@ -33,8 +28,6 @@ services.AddScoped<LicenseService>();
 services.AddScoped<LicenseTypeService>();
 //licenseFee
 services.AddScoped<LicenseFeeService>();
-//tccn
-services.AddScoped<ToChucCaNhanService>();
 
 services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
 {

@@ -15,7 +15,7 @@ namespace doanapi.Dto
         public DateTime? EffectiveDate { get; set; }
         public DateTime? ExpirationDate { get; set; }
         public string Duration { get; set; }
-        public string Signer { get; set; }
+        public string LicenseHolder { get; set; }
         public string LicensingAuthorities { get; set; }
         public string FileLicense { get; set; }
         public string FileDocument { get; set; }
@@ -52,7 +52,6 @@ namespace doanapi.Dto
         }
         public List<LicenseDto> LicenseOld { get; set; }
         public LicenseTypeDto LicenseType { get; set; }
-        public OrganizationDto Organization { get; set; }
         public ConstructionDto Construction { get; set; }
 
     }
