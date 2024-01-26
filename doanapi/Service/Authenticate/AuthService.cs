@@ -108,7 +108,14 @@ namespace doanapi.Service
             if (res.Succeeded) { return true; }
             return false;
         }
-
+        public async Task<bool> UpdatePasswordAsync(UserModel model,string currentPassword, string newPassword, string newConfirmPassword)
+        {
+            if (newPassword != newConfirmPassword) return false;
+            var user = await _userManager.FindByNameAsync(model.UserName!);
+            if (user == null) return false;
+            var res = await _userManager.ChangePasswordAsync(user!, currentPassword, newPassword);
+            return res.Succeeded;
+        }
         public async Task<bool> SetPasswordAsync(UserModel model, string newPassword)
         {
             var user = await _userManager.FindByNameAsync(model.UserName!);
